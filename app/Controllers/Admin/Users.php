@@ -68,33 +68,6 @@ class Users extends BaseController
                     ]
                 ],
 
-                //   'address'=>[
-                //       'rules'=>'required',
-                //       'errors'=>[
-                //           'required'=>'Address is required'
-                //       ]
-                //       ],
-                //   'image' =>[
-                //       //'rules'=>'uploaded[image]|max_size[image,50]|ext_in[image,png,jpg,jpeg,bmp,gif]',
-                //       'rules'=>'max_size[image,100]|ext_in[image,png,jpg,jpeg,bmp,gif]',
-                //       'errors'=>[
-                //           //'uploaded'=>lang('User.validation.image.uploaded'),
-                //           'max_size'=>'Image should not greater than 100 KB of size.',
-                //           'ext_in'=>'Image must be extension with png,jpg,jpeg,bmp,gif.',
-                //       ]
-                //   ],
-                //   'privilege_id'=>[
-                //       'rules'=>'required',
-                //       'errors'=>[
-                //           'required'=>'Privilege is required'
-                //       ]
-                //     ], 
-                //   'status'=>[
-                //       'rules'=>'required',
-                //       'errors'=>[
-                //           'required'=>'Status must be select'
-                //       ]
-                //   ]
             ]);
             if (!$validation) {
                 $data['validation'] = $this->validator;
