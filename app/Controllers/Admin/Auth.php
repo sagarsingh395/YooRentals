@@ -15,7 +15,7 @@ class Auth extends BaseController
     }
     public function login()
     {
-        $data = []; //this is test line
+        $data = []; 
         if($this->request->getMethod() == 'POST'){
             // print_r($_POST); exit;
             $validation = $this->validate([
@@ -57,7 +57,7 @@ class Auth extends BaseController
                         'phone' => $user_info->phone,
                         'address' => $user_info->address,
                         'image' => $user_info->image,
-                        'privilege_id' => $user_info->privilege_id,
+                        // 'privilege_id' => $user_info->privilege_id,
                         'status' => $user_info->status,
                         'userlogin' => true,
                     );
