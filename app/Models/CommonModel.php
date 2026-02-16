@@ -1,9 +1,14 @@
 <?php
+
 namespace App\Models;
+
 use CodeIgniter\Model;
 
 class CommonModel extends Model
 {
+    protected $useSoftDeletes = true;
+    protected $deletedField  = 'deleted_at';
+    protected $db;
     private $adminTbl;
     public function __construct()
     {
@@ -18,16 +23,14 @@ class CommonModel extends Model
         $builder->Insert($data);
         return $this->db->insertID();
     }
-    public function getAllRecord($table,$whereArr=null,$orderBy=null)
+    public function getAllRecord($table, $whereArr = null, $orderBy = null)
     {
         $builder = $this->db->table($table);
-        if($whereArr != null){
+        if ($whereArr != null) {
             $builder->where($whereArr);
-
         }
-        if($orderBy != null){
+        if ($orderBy != null) {
             $builder->orderBy($orderBy[0], $orderBy[1]);
-
         }
         $query = $builder->get();
 
@@ -37,12 +40,11 @@ class CommonModel extends Model
         // echo '<pre>';print_r($result); exit;
         return $result;
     }
-    public function getOneRecord($table,$whereArr=null)
+    public function getOneRecord($table, $whereArr = null)
     {
         $builder = $this->db->table($table);
-        if($whereArr != null){
+        if ($whereArr != null) {
             $builder->where($whereArr);
-
         }
         $query = $builder->get();
 
@@ -50,11 +52,18 @@ class CommonModel extends Model
         // echo '<pre>';print_r($result); exit;
         return $result;
     }
-    public function updateRecord($table, $data, $whereArr){
+    public function updateRecord($table, $data, $whereArr)
+    {
         $builder = $this->db->table($table);
         $builder->where($whereArr);
         $result = $builder->update($data);
         return $result;
     }
-
+    public function deleteRecord($table, $whereArr)
+    {
+        $builder = $this->db->table($table);
+        $builder->where($whereArr);
+        $result = $builder->delete();
+        return $result;
+    }
 }
