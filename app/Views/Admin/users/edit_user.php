@@ -66,8 +66,9 @@
                             <!-- Photo -->
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Photo</label>
-                                <input type="file" name="image"
+                                <input type="file" name="image" value="<?= set_value('image', $user->image) ?>"
                                     class="form-control">
+                                <span class="text-danger"><?=(isset($validation))?$validation->showError('image'):''?></span> 
                             </div>
 
                             <!-- Status -->
