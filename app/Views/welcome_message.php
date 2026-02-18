@@ -1011,5 +1011,4 @@
         crossorigin="anonymous"></script>
     <script src="<?= base_url('assets/users/vendors/bootstrap/icons/iconify-icon.min.js') ?>"></script>
 </body>
-
 </html>
