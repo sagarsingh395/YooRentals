@@ -15,47 +15,51 @@ class Auth extends BaseController
     }
     public function login()
     {
-        $data = []; 
-        if($this->request->getMethod() == 'POST'){
+        $data = [];
+        if ($this->request->getMethod() == 'POST') {
             // print_r($_POST); exit;
             $validation = $this->validate([
-                'email'=>[
-                    'rules'=>'required|valid_email|is_not_unique[tbl_admin.email]',
-                    'errors'=>[
-                        'required'=>'Email is required',
-                        'valid_email'=>'Enter a valid email address',
-                        'is_not_unique'=>'This email is not registered on your service'
+                'email' => [
+                    'rules' => 'required|valid_email|is_not_unique[admin.email]',
+                    'errors' => [
+                        'required' => 'Email is required',
+                        'valid_email' => 'Enter a valid email address',
+                        'is_not_unique' => 'This email is not registered on your service'
                     ]
-                    ],
-                'password'=>[
-                    'rules'=>'required|min_length[5]|max_length[12]',
-                    'errors'=>[
-                        'required'=>'Password is required',
-                        'min_length'=>'Password must have atleast 5 characters in length',
-                        'max_length'=>'Password must not have more than 12 characters in length'
+                ],
+                'password' => [
+                    'rules' => 'required|min_length[5]|max_length[12]',
+                    'errors' => [
+                        'required' => 'Password is required',
+                        'min_length' => 'Password must have atleast 5 characters in length',
+                        'max_length' => 'Password must not have more than 12 characters in length'
                     ]
                 ]
             ]);
-            if(!$validation){
+
+            if (!$validation) {
                 $data['validation'] = $this->validator;
-            }else{
+                return view('Auth/login', $data);
+            } else {
+                // print_r($_POST); exit;
                 $email = $this->request->getPost('email');
                 $password = $this->request->getPost('password');
                 $user_info = $this->authmodel->isvalidate($email);
-                if(!isset($user_info->user_id)){
-                    // print_r($user_info); exit;
-                    session()->setFlashdata('message','<div class="alert alert-danger">Inactive user. Contact administrator...</div>');
-                    return redirect()->to(base_url('admin'));
 
+                if (!isset($user_info->id)) {
+                    // print_r($user_info); exit;
+                    session()->setFlashdata('message', '<div class="alert alert-danger">Inactive user. Contact administrator...</div>');
+                    return redirect()->to('/' . ADMIN_LOGIN)->withInput(); // ADMIN_LOGIN constant use
                 }
+
                 $check_password = Hash::check($password, $user_info->password);
-                if($check_password){
+                if ($check_password) {
                     $sessionData = array(
-                        'user_id' => $user_info->user_id,
+                        'id' => $user_info->id,
                         'name' => $user_info->name,
                         'email' => $user_info->email,
                         'phone' => $user_info->phone,
-                        'address' => $user_info->address,
+                        // 'address' => $user_info->address,
                         'image' => $user_info->image,
                         // 'privilege_id' => $user_info->privilege_id,
                         'status' => $user_info->status,
@@ -63,17 +67,18 @@ class Auth extends BaseController
                     );
                     session()->set($sessionData);
                     return redirect()->to('/admin/dashboard');
-                }else{
-                    session()->setFlashdata('message','<div class="alert alert-danger">Incorrect Password</div>');
-                    return redirect()->to('/admin')->withInput();
+                } else {
+                    session()->setFlashdata('message', '<div class="alert alert-danger">Incorrect Password</div>');
+                    return redirect()->to('/' . ADMIN_LOGIN)->withInput(); // ADMIN 
                 }
-                // print_r($user_info);exit;
             }
         }
+
         return view('Auth/login', $data);
     }
-    public function logout(){
-        if(session()->has('userlogin')){
+    public function logout()
+    {
+        if (session()->has('userlogin')) {
             session()->destroy();
         }
         return redirect()->back();

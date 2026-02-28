@@ -80,3 +80,4 @@ defined('EXIT__AUTO_MAX')      || define('EXIT__AUTO_MAX', 125);    // highest a
 
 
 defined('DP_PATH') || define('DP_PATH', 'assets/upload/users/');
+define('ADMIN_LOGIN','wave');

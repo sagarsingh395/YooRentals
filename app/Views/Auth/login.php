@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>YooRental Admin</title>
+    <title>Yoo Rental</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="<?=base_url('assets/admin/vendors/mdi/css/materialdesignicons.min.css') ?>">
     <link rel="stylesheet" href="<?=base_url('assets/admin/vendors/ti-icons/css/themify-icons.css') ?>">
@@ -18,9 +18,16 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="<?=base_url('assets/admin/css/style.css') ?>">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="<?=base_url('assets/admin/images/favicon.png') ?>" />
+    <link rel="shortcut icon" href="<?=base_url('assets/admin/images/logo1a.png') ?>" />
   </head>
   <body>
+    <!-- <?php
+    $password = "123456";
+$hash = password_hash($password, PASSWORD_DEFAULT);
+
+echo $hash;
+?> -->
+
     <div class="container-scroller">
       <div class="container-fluid page-body-wrapper full-page-wrapper">
         <div class="content-wrapper d-flex align-items-center auth">
@@ -28,7 +35,7 @@
             <div class="col-lg-4 mx-auto">
               <div class="auth-form-light text-left p-5">
                 <div class="brand-logo">
-                  <img src="<?=base_url('assets/admin/images/logo.svg') ?>">
+                  <img src="<?=base_url('assets/admin/images/logo1.png') ?>">
                 </div>
                 <?php echo session()->getFlashdata('message'); ?>
                 <!-- <h4>Hello! let's get started</h4>
