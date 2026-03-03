@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="<?= base_url('assets/admin/vendors/ti-icons/css/themify-icons.css') ?>">
   <link rel="stylesheet" href="<?= base_url('assets/admin/vendors/css/vendor.bundle.base.css') ?>">
   <link rel="stylesheet" href="<?= base_url('assets/admin/vendors/font-awesome/css/font-awesome.min.css') ?>">
-  <!-- endinject -->
+  <!-- endinject -->  
   <!-- Plugin css for this page -->
   <link rel="stylesheet" href="<?= base_url('assets/admin/vendors/font-awesome/css/font-awesome.min.css') ?>" />
   <link rel="stylesheet"

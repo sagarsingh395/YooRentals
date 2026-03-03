@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers\Admin;
+
 use App\Controllers\BaseController;
 use App\Models\AuthModel;
 use App\Libraries\Hash;
@@ -17,10 +18,9 @@ class Auth extends BaseController
     {
         $data = [];
         if ($this->request->getMethod() == 'POST') {
-            // print_r($_POST); exit;
             $validation = $this->validate([
                 'email' => [
-                    'rules' => 'required|valid_email|is_not_unique[admin.email]',
+                    'rules' => 'required|valid_email|is_not_unique[tbl_admin.email]',
                     'errors' => [
                         'required' => 'Email is required',
                         'valid_email' => 'Enter a valid email address',
@@ -36,44 +36,38 @@ class Auth extends BaseController
                     ]
                 ]
             ]);
-
             if (!$validation) {
                 $data['validation'] = $this->validator;
-                return view('Auth/login', $data);
             } else {
-                // print_r($_POST); exit;
                 $email = $this->request->getPost('email');
                 $password = $this->request->getPost('password');
                 $user_info = $this->authmodel->isvalidate($email);
-
-                if (!isset($user_info->id)) {
-                    // print_r($user_info); exit;
+                if (empty($user_info)) {
                     session()->setFlashdata('message', '<div class="alert alert-danger">Inactive user. Contact administrator...</div>');
-                    return redirect()->to('/' . ADMIN_LOGIN)->withInput(); // ADMIN_LOGIN constant use
+                    redirect()->to(base_url('admin'));
                 }
-
                 $check_password = Hash::check($password, $user_info->password);
                 if ($check_password) {
                     $sessionData = array(
-                        'id' => $user_info->id,
+                        'user_id' => $user_info->user_id,
                         'name' => $user_info->name,
                         'email' => $user_info->email,
                         'phone' => $user_info->phone,
-                        // 'address' => $user_info->address,
+                        'address' => $user_info->address,
                         'image' => $user_info->image,
-                        // 'privilege_id' => $user_info->privilege_id,
                         'status' => $user_info->status,
                         'userlogin' => true,
+                        'role' => 'admin'
                     );
                     session()->set($sessionData);
                     return redirect()->to('/admin/dashboard');
                 } else {
                     session()->setFlashdata('message', '<div class="alert alert-danger">Incorrect Password</div>');
-                    return redirect()->to('/' . ADMIN_LOGIN)->withInput(); // ADMIN 
+                    return redirect()->to('/admin')->withInput();
                 }
+                // print_r($user_info);exit;
             }
         }
-
         return view('Auth/login', $data);
     }
     public function logout()

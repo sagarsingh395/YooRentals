@@ -22,7 +22,7 @@ class Profile extends BaseController
         }
 
         $data['profile'] = $this->commonmodel
-            ->getOneRecord('admin', ['id' => $id]);
+            ->getOneRecord('tbl_admin', ['id' => $id]);
 
         return view('Admin/profile/index', $data);
     }

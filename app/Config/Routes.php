@@ -38,7 +38,7 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     /************************************Profile*****************************************/
     $routes->match(['get', 'post'], 'admin/profile', 'Admin\Profile::index');
     $routes->match(['get', 'post'], 'admin/profile/change_password', 'Admin\Profile::change_password');
-    $routes->match(['get', 'post'], 'admin/edit_profile/(:num)', 'Admin\profile::edit_profile/$1');
+    $routes->match(['get', 'post'], 'admin/edit_profile/(:num)', 'Admin\Profile::edit_profile/$1');
 });
 
 $routes->group('', ['filter' => 'AlreadyLoggedIn'], function ($routes) {
