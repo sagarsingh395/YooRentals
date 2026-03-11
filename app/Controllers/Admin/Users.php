@@ -20,8 +20,8 @@ class Users extends BaseController
     {
         $data = [];
         $data['users'] = $this->commonmodel->getAllRecord('tbl_admin', ['status !=' => 2], ['user_id', 'DESC']);
-         //$data['users'] = $this->commonmodel->getAllRecord('tbl_admin','',['user_id','DESC']);
-        
+        //$data['users'] = $this->commonmodel->getAllRecord('tbl_admin','',['user_id','DESC']);
+
         return view('Admin/users/userindex', $data);
     }
     public function add_user()
@@ -49,7 +49,9 @@ class Users extends BaseController
                         'required' => 'Phone is required',
                         'numeric' => 'You must enter numeric value',
                         'min_length' => 'Phone Number must be 10 digit in length',
-                        'max_length' => 'Phone Number must not have more than 10 digit in length'
+                        'max_length' => 'Phone Number must not have more than 10 digit in length',
+                        // 'is_unique' => 'Phone number already taken'
+
                     ]
                 ],
                 'password' => [
@@ -71,11 +73,24 @@ class Users extends BaseController
                 ],
 
             ]);
+
             if (!$validation) {
                 $data['validation'] = $this->validator;
                 //return view('admin/users/add_user',$this->data);
             } else {
                 // print_r($_POST); exit;
+                
+                    if ($img = $this->request->getFile('image')) {
+                        $imgname = $img->getName();
+                        if ($img->isValid() && !$img->hasMoved()) {
+                            $ext = explode('.', $imgname);
+                            $ext = end($ext);
+                            $newName = 'u_' . time() . '.' . $ext;
+                            $img->move('assets/upload/users/', $newName);
+                        }
+                    
+                    $post['image'] = $newName;
+                }
                 $post['name'] = $this->request->getPost('name');
                 $post['email'] = $this->request->getPost('email');
                 $post['phone'] = $this->request->getPost('phone');
