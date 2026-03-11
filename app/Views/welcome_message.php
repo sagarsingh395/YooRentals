@@ -158,7 +158,8 @@
 
                 <div class="col-md-3">
                     <select class="form-control">
-                        <option>Select City</option>
+                  
+                    <option>Select City</option>
                         <option>Delhi</option>
                         <option>Mumbai</option>
                         <option>Patna</option>
