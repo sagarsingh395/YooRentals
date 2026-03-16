@@ -21,8 +21,7 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->get('admin/logout', 'Admin\Auth::logout');
 
     /************************************* USER ROUTES *************************************/
-    /*-------------------------------- user register/login --------------------------*/
-
+    
     $routes->get('admin/users', 'Admin\Users::index');
     $routes->match(['get', 'post'], 'admin/add_user', 'Admin\Users::add_user');
     $routes->match(['get', 'post'], 'admin/edit_user/(:num)', 'Admin\Users::edit_user/$1');

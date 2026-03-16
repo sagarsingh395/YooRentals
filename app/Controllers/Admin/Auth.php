@@ -63,7 +63,7 @@ class Auth extends BaseController
                     return redirect()->to('/admin/dashboard');
                 } else {
                     session()->setFlashdata('message', '<div class="alert alert-danger">Incorrect Password</div>');
-                    return redirect()->to('/admin')->withInput();
+                    return redirect()->to('/' . ADMIN_LOGIN)->withInput();
                 }
                 // print_r($user_info);exit;
             }

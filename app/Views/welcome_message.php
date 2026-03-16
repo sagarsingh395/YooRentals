@@ -5,92 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YooRental</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background: #0f0f0f;
-            color: white;
-            padding-top: 70px;
-            font-family: sans-serif;
-        }
-        /* NAVBAR */
-        .navbar {
-            background: #000;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-        /* LOGO FIX */
-        .navbar-brand img {
-            height: 45px;
-            width: auto;
-            object-fit: contain;
-        }
-        .brand-logo img {
-            height: 45px;
-        }
-        .brand-logo-mini img {
-            height: 35px;
-        }
-        /* HEADER */
-        .carousel-item img {
-            height: 65vh;
-            object-fit: cover;
-            filter: brightness(60%);
-        }
-        /* SEARCH FORM */
-        .search-box {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
-            width: 80%;
-        }
-        /* SECTION */
-        .section {
-            padding: 80px 0;
-        }
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-            font-weight: bold;
-            color: white;
-        }
-        /* CARDS */
-        .card {
-            background: #1a1a1a;
-            border: none;
-            border-radius: 12px;
-            overflow: hidden;
-            transition: .3s;
-            color: white;
-        }
-        .card:hover {
-            transform: translateY(-8px);
-        }
-        .card img {
-            height: 220px;
-            object-fit: cover;
-        }
-        .btn-primary {
-            background: #a855f7;
-            border: none;
-        }
-        /* FOOTER */
-        footer {
-            background: #000;
-            padding: 40px;
-            text-align: center;
-            color: white;
-        }
-    </style>
-
+    <link href="<?= base_url('assets/users/css/bootstrap.min.css') ?>" rel="stylesheet"> 
+  <link rel="stylesheet" href="<?= base_url('assets/users/css/style.css') ?>">
 </head>
-
 <body>
 
     <!-- NAVBAR -->
@@ -126,15 +43,15 @@
         <div class="carousel-inner">
 
             <div class="carousel-item active">
-                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945" class="d-block w-100">
+                <img src="<?= base_url('assets/users/images/header1.jpeg') ?>" alt="Image" class="d-block w-100">
             </div>
 
             <div class="carousel-item">
-                <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85" class="d-block w-100">
+                <img src="<?= base_url('assets/users/images/header2.png') ?>" alt="Image" class="d-block w-100">
             </div>
 
             <div class="carousel-item">
-                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750" class="d-block w-100">
+                <img src="<?= base_url('assets/users/images/header3.jpeg') ?>" alt="Image" class="d-block w-100">
             </div>
 
         </div>
@@ -158,8 +75,8 @@
 
                 <div class="col-md-3">
                     <select class="form-control">
-                  
-                    <option>Select City</option>
+
+                        <option>Select City</option>
                         <option>Delhi</option>
                         <option>Mumbai</option>
                         <option>Patna</option>
@@ -181,7 +98,7 @@
 
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427">
+                        <img src="<?= base_url('assets/users/images/rooms/room1.jpeg') ?>" alt="Image">
                         <div class="card-body">
                             <h5>Luxury Room</h5>
                             <button class="btn btn-primary w-100">Book Now</button>
@@ -191,7 +108,7 @@
 
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b">
+                        <img src="<?= base_url('assets/users/images/rooms/room2.jpeg') ?>" alt="Image">
                         <div class="card-body">
                             <h5>Deluxe Room</h5>
                             <button class="btn btn-primary w-100">Book Now</button>
@@ -201,7 +118,7 @@
 
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32">
+                        <img src="<?= base_url('assets/users/images/rooms/room3.jpeg') ?>" alt="Image">
                         <div class="card-body">
                             <h5>Family Suite</h5>
                             <button class="btn btn-primary w-100">Book Now</button>
@@ -211,7 +128,7 @@
 
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c">
+                        <img src="<?= base_url('assets/users/images/rooms/room4.jpeg') ?>" alt="Image">
                         <div class="card-body">
                             <h5>Classic Room</h5>
                             <button class="btn btn-primary w-100">Book Now</button>
@@ -221,7 +138,7 @@
 
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1505691723518-36a5ac3be353">
+                        <img src="<?= base_url('assets/users/images/rooms/room5.jpeg') ?>" alt="Image">
                         <div class="card-body">
                             <h5>Modern Room</h5>
                             <button class="btn btn-primary w-100">Book Now</button>
@@ -231,7 +148,7 @@
 
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1501183638710-841dd1904471">
+                        <img src="<?= base_url('assets/users/images/rooms/room6.jpeg') ?>" alt="Image">
                         <div class="card-body">
                             <h5>Budget Room</h5>
                             <button class="btn btn-primary w-100">Book Now</button>
@@ -385,7 +302,7 @@
         <p>All rentals in one platform</p>
         <p>© <?= date('Y') ?> YooRental</p>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="<?= base_url('assets/users/js/bootstrap.min.js') ?>"></script>
 </body>
 
 </html>

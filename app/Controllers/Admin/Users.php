@@ -186,8 +186,10 @@ class Users extends BaseController
                 $post['phone'] = $this->request->getPost('phone');
                 $post['status'] = $this->request->getPost('status');
                 // $post['ip_address'] = $this->request->getIPAddress();
-                // $post['update_by'] = session('user_id');
-                // $post['updated'] = date('Y-m-d H:i:s');
+                $post['updated_by'] = session('user_id');
+                $post['updated_at'] = date('Y-m-d H:i:s');
+                $post['deleted_by'] = session('user_id');
+                $post['deleted_at'] = date('Y-m-d H:i:s');
 
                 $updated = $this->commonmodel->updateRecord('tbl_admin', $post, ['user_id' => $id]);
                 if ($updated) {
