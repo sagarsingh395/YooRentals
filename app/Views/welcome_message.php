@@ -165,7 +165,7 @@
             <div class="row g-4">
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70">
+                        <img src="<?= base_url('assets/users/images/cars/car1.png') ?>" alt="Image">
                         <div class="card-body">
                             <h5>BMW</h5>
                             <button class="btn btn-primary w-100">Book Now</button>
@@ -175,7 +175,7 @@
 
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1549921296-3a6bce8e3a5b">
+                        <img src="<?= base_url('assets/users/images/cars/car2.png') ?>" alt="Image">
                         <div class="card-body">
                             <h5>Audi</h5>
                             <button class="btn btn-primary w-100">Book Now</button>
@@ -185,7 +185,7 @@
 
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a">
+                        <img src="<?= base_url('assets/users/images/cars/car3.png') ?>" alt="Image">
                         <div class="card-body">
                             <h5>Mercedes</h5>
                             <button class="btn btn-primary w-100">Book Now</button>
@@ -195,7 +195,7 @@
 
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c">
+                        <img src="<?= base_url('assets/users/images/cars/car4.png') ?>" alt="Image">
                         <div class="card-body">
                             <h5>Mustang</h5>
                             <button class="btn btn-primary w-100">Book Now</button>
@@ -205,7 +205,7 @@
 
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d">
+                        <img src="<?= base_url('assets/users/images/cars/car5.png') ?>" alt="Image">
                         <div class="card-body">
                             <h5>Range Rover</h5>
                             <button class="btn btn-primary w-100">Book Now</button>
@@ -215,7 +215,7 @@
 
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1493238792000-8113da705763">
+                        <img src="<?= base_url('assets/users/images/cars/car6.png') ?>" alt="Image">
                         <div class="card-body">
                             <h5>Toyota</h5>
                             <button class="btn btn-primary w-100">Book Now</button>
@@ -234,7 +234,7 @@
 
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3">
+                       <img src="<?= base_url('assets/users/images/halls/hall1.png') ?>" alt="Image">
                         <div class="card-body">
                             <h5>Royal Hall</h5>
                             <button class="btn btn-primary w-100">Book Now</button>
@@ -244,7 +244,7 @@
 
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1549463511-2f543e4905b4">
+                       <img src="<?= base_url('assets/users/images/halls/hall2.png') ?>" alt="Image">
                         <div class="card-body">
                             <h5>Grand Hall</h5>
                             <button class="btn btn-primary w-100">Book Now</button>
@@ -254,7 +254,7 @@
 
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a">
+                        <img src="<?= base_url('assets/users/images/halls/hall3.png') ?>" alt="Image">
                         <div class="card-body">
                             <h5>Classic Hall</h5>
                             <button class="btn btn-primary w-100">Book Now</button>
@@ -264,7 +264,7 @@
 
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329">
+                       <img src="<?= base_url('assets/users/images/halls/hall4.png') ?>" alt="Image">
                         <div class="card-body">
                             <h5>Garden Hall</h5>
                             <button class="btn btn-primary w-100">Book Now</button>
@@ -274,7 +274,7 @@
 
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1478147427282-58a87a120781">
+                        <img src="<?= base_url('assets/users/images/halls/hall5.png') ?>" alt="Image">
                         <div class="card-body">
                             <h5>Luxury Hall</h5>
                             <button class="btn btn-primary w-100">Book Now</button>
@@ -284,7 +284,7 @@
 
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1507502707541-f369a3b18502">
+                        <img src="<?= base_url('assets/users/images/halls/hall6.png') ?>" alt="Image">
                         <div class="card-body">
                             <h5>Classic Banquet</h5>
                             <button class="btn btn-primary w-100">Book Now</button>

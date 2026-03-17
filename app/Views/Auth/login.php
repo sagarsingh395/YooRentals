@@ -10,12 +10,7 @@
     <link rel="stylesheet" href="<?=base_url('assets/admin/vendors/ti-icons/css/themify-icons.css') ?>">
     <link rel="stylesheet" href="<?=base_url('assets/admin/vendors/css/vendor.bundle.base.css') ?>">
     <link rel="stylesheet" href="<?=base_url('assets/admin/vendors/font-awesome/css/font-awesome.min.css') ?>">
-    <!-- endinject -->
-    <!-- Plugin css for this page -->
-    <!-- End plugin css for this page -->
-    <!-- inject:css -->
-    <!-- endinject -->
-    <!-- Layout styles -->
+
     <link rel="stylesheet" href="<?=base_url('assets/admin/css/style.css') ?>">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="<?=base_url('assets/admin/images/logo1a.png') ?>" />
