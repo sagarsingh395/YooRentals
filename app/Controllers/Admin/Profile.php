@@ -15,21 +15,21 @@ class Profile extends BaseController
 
     public function index()
     {
-        $id = session('id');
+        $id = session('user_id');
 
         if (!$id) {
             return redirect()->to('/admin');
         }
 
         $data['profile'] = $this->commonmodel
-            ->getOneRecord('tbl_admin', ['id' => $id]);
+            ->getOneRecord('tbl_admin', ['user_id' => $id]);
 
         return view('Admin/profile/index', $data);
     }
 
     public function change_password()
     {
-        $id = session('id'); // Logged-in user id
+        $id = session('user_id'); // Logged-in user id
 
         if (!$id) {
             return redirect()->to('/admin');
@@ -67,12 +67,12 @@ class Profile extends BaseController
             if (!$validation) {
                 // Validation failed
                 $data['validation'] = $this->validator;
-                $data['profile'] = $this->commonmodel->getOneRecord('admin', ['id' => $id]);
+                $data['profile'] = $this->commonmodel->getOneRecord('tbl_admin', ['user_id' => $id]);
                 return view('Admin/profile/change_password', $data);
             }
 
             // Get current user data
-            $profile = $this->commonmodel->getOneRecord('admin', ['id' => $id]);
+            $profile = $this->commonmodel->getOneRecord('tbl_admin', ['user_id' => $id]);
 
             // Check old password (CI4 / PHP native)
             // $oldPassword = $this->request->getPost('oldpwd');
@@ -84,9 +84,9 @@ class Profile extends BaseController
             // Update password (CI4 / PHP native)
             $newPassword = $this->request->getPost('pwd');
             $updated = $this->commonmodel->updateRecord(
-                'admin',
+                'tbl_admin',
                 ['password' => password_hash($newPassword, PASSWORD_DEFAULT)],
-                ['id' => $id]
+                ['user_id' => $id]
             );
 
             if ($updated) {
@@ -99,7 +99,7 @@ class Profile extends BaseController
 
         } else {
             // GET request, show form
-            $data['profile'] = $this->commonmodel->getOneRecord('admin', ['id' => $id]);
+            $data['profile'] = $this->commonmodel->getOneRecord('tbl_admin', ['user_id' => $id]);
             return view('Admin/profile/change_password', $data);
         }
     }
@@ -165,10 +165,10 @@ class Profile extends BaseController
                 $post['status'] = $this->request->getPost('status');
                 $post['address'] = $this->request->getPost('address');
                 // $post['ip_address'] = $this->request->getIPAddress();
-                $post['update_by'] = session('id');
-                $post['updated'] = date('Y-m-d H:i:s');
+                $post['updated_by'] = session('user_id');
+                $post['updated_by'] = date('Y-m-d H:i:s');
 
-                $updated = $this->commonmodel->updateRecord('admin', $post, ['id' => $id]);
+                $updated = $this->commonmodel->updateRecord('tbl_admin', $post, ['user_id' => $id]);
                 if ($updated) {
                     session()->setFlashdata(['message' => 'User Updated Successfully', 'type' => 'success']);
                 } else {
@@ -178,7 +178,7 @@ class Profile extends BaseController
 
             }
         }
-        $data['user'] = $this->commonmodel->getOneRecord('admin', ['id' => $id]);
+        $data['user'] = $this->commonmodel->getOneRecord('tbl_admin', ['user_id' => $id]);
         return view('Admin/profile/edit_profile', $data);
     }
 }
