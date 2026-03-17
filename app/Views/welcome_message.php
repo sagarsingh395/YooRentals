@@ -10,7 +10,6 @@
 </head>
 <body>
 
-    <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand brand-logo-mini" href="<?= base_url('admin/dashboard') ?>">
