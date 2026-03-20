@@ -8,6 +8,25 @@
                 <h2>User Details</h2>
                 <a href="<?= base_url('/admin') ?>" class="btn btn-info">Back</a>
             </div>
+           <?php if (session()->getFlashdata('message')): ?>
+            <?php
+            $type = session()->getFlashdata('type');
+            $alertClass = ($type === 'success') ? 'alert-success' : 'alert-danger';
+            ?>
+            <div id="flashMessage" class="alert <?= $alertClass ?> alert-dismissible fade show small" role="alert">
+                <?= session()->getFlashdata('message') ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            <script>
+                setTimeout(() => {
+                    let alert = document.getElementById('flashMessage');
+                    if (alert) {
+                        let bsAlert = new bootstrap.Alert(alert);
+                        bsAlert.close();
+                    }
+                }, 4000);
+            </script>
+        <?php endif; ?>
         </div>
         <section class="section profile">
             <div class="row">

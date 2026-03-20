@@ -2,34 +2,22 @@
 <?= $this->section("content") ?>
 <div class="content-wrapper">
     <main>
-        <!-- <div class="container-fluid px-4"> -->
-            
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <h2>Change Password</h2>
                     <a href="<?= base_url('/admin') ?>" class="btn btn-info">Back</a>
                 </div>
+                
             </div>
             <?php if (session()->has('message')) {
                 echo session()->get('message');
             } ?>
 
             <div class="card shadow-lg border-0 mb-4">
-                <!-- <div class="card-header">
-                    <i class="fas fa-table me-1"></i>
-                    DataTable Example
-                </div> -->
                 <div class="card-body">
                     <form autocomplete="off" action="<?= base_url('admin/profile/change_password') ?>" method="post">
                         <?= csrf_field(); ?>
                         <div class="row">
-                            <?php /* <div class="col-md-8 my-2">
-                      <div class="form-group">
-                          <label for="oldpwd">Old Password</label>
-                          <input type="password" class="form-control" name="oldpwd" id="oldpwd" value="<?=set_value('oldpwd'); ?>" placeholder="Old Password">
-                          <span class="text-danger"><?=isset($validation)?$validation->showError('oldpwd'):''; ?></span>
-                      </div>
-                  </div> */ ?>
                             <div class="col-md-8 my-2">
                                 <div class="form-group">
                                     <label for="pwd">New Password</label>

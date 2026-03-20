@@ -21,13 +21,17 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->get('admin/logout', 'Admin\Auth::logout');
 
     /************************************* USER ROUTES *************************************/
-    
+
     $routes->get('admin/users', 'Admin\Users::index');
     $routes->match(['get', 'post'], 'admin/add_user', 'Admin\Users::add_user');
     $routes->match(['get', 'post'], 'admin/edit_user/(:num)', 'Admin\Users::edit_user/$1');
     $routes->match(['get', 'post'], 'admin/view_user/(:num)', 'Admin\Users::view_user/$1');
     $routes->match(['get', 'post'], 'admin/delete_user/(:num)', 'Admin\Users::delete_user/$1');
     $routes->match(['get', 'post'], 'admin/doDelete/(:num)', 'Admin\Users::doDelete/$1');
+
+    /************************User Group**************************************** */
+    $routes->get('admin/user-group', 'Admin\UserGroup::index');
+    $routes->match(['get', 'post'], 'admin/add-group', 'Admin\UserGroup::add_group');
 
     /************************************Product*************************************** */
     $routes->get('admin/products', 'Admin\Product::index');

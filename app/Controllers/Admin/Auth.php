@@ -44,7 +44,8 @@ class Auth extends BaseController
                 $user_info = $this->authmodel->isvalidate($email);
                 if (empty($user_info)) {
                     session()->setFlashdata('message', '<div class="alert alert-danger">Inactive user. Contact administrator...</div>');
-                    redirect()->to(base_url('admin'));
+                    // redirect()->to(base_url('admin'));
+                    return redirect()->to('/' . ADMIN_LOGIN)->withInput();
                 }
                 $check_password = Hash::check($password, $user_info->password);
                 if ($check_password) {
@@ -70,11 +71,21 @@ class Auth extends BaseController
         }
         return view('Auth/login', $data);
     }
-    public function logout()
-    {
-        if (session()->has('userlogin')) {
-            session()->destroy();
+
+     public function logout(){
+        if(session()->has('userlogin')){
+            $loginItemArray = ['user_id','name','email','phone','address','image','status','userlogin'];
+            session()->remove($loginItemArray);
+            //session()->destroy();
+            return redirect()->to('/admin?access=out')->with('message','<div class="alert alert-success">You are logged out</div>');
         }
         return redirect()->back();
     }
+    // public function logout()
+    // {
+    //     if (session()->has('userlogin')) {
+    //         session()->destroy();
+    //     }
+    //     return redirect()->back();
+    // }
 }

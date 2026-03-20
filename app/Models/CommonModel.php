@@ -10,10 +10,12 @@ class CommonModel extends Model
     protected $deletedField  = 'deleted_at';
     protected $db;
     private $adminTbl;
+    private $groupTbl;
     public function __construct()
     {
         $this->db = \Config\Database::connect();
         $this->adminTbl = 'tbl_admin';
+        $this->groupTbl = 'tbl_group';
         // $this->privilegeTbl = 'tbl_privilege';
         // $this->privilegePathTbl = 'tbl_privilege_path';
     }

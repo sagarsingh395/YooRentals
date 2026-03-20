@@ -39,14 +39,6 @@ class Profile extends BaseController
 
             // Validation
             $validation = $this->validate([
-                /*'oldpwd' => [
-                    'rules' => 'required|min_length[5]|max_length[12]',
-                    'errors' => [
-                        'required' => 'Old Password is required',
-                        'min_length' => 'Old Password must have at least 5 characters',
-                        'max_length' => 'Old Password must not have more than 12 characters'
-                    ]
-                ],*/
                 'pwd' => [
                     'rules' => 'required|min_length[5]|max_length[12]',
                     'errors' => [
@@ -74,14 +66,6 @@ class Profile extends BaseController
             // Get current user data
             $profile = $this->commonmodel->getOneRecord('tbl_admin', ['user_id' => $id]);
 
-            // Check old password (CI4 / PHP native)
-            // $oldPassword = $this->request->getPost('oldpwd');
-            // if (!password_verify($oldPassword, $profile->password)) {
-            //     session()->setFlashdata('message', '<div class="alert alert-danger">Incorrect Old Password</div>');
-            //     return redirect()->to('admin/profile/change_password')->withInput();
-            // }
-
-            // Update password (CI4 / PHP native)
             $newPassword = $this->request->getPost('pwd');
             $updated = $this->commonmodel->updateRecord(
                 'tbl_admin',
@@ -90,13 +74,12 @@ class Profile extends BaseController
             );
 
             if ($updated) {
-                session()->setFlashdata('message', '<div class="alert alert-success">Password changed successfully.</div>');
+                session()->setFlashdata(['message' => 'Password changed successfully.', 'type' => 'success']);
             } else {
-                session()->setFlashdata('message', '<div class="alert alert-danger">Something went wrong.</div>');
+                session()->setFlashdata(['message' => 'Something went wrong....', 'type' => 'danger']);
             }
 
-            return redirect()->to('admin/profile/change_password');
-
+            return redirect()->to('admin/users');
         } else {
             // GET request, show form
             $data['profile'] = $this->commonmodel->getOneRecord('tbl_admin', ['user_id' => $id]);
@@ -145,21 +128,7 @@ class Profile extends BaseController
             if (!$validation) {
                 $data['validation'] = $this->validator;
                 //return view('admin/users/add_user',$this->data);
-            } else {
-                // print_r($_POST); exit;
-                // if ($_FILES['image']['name'] != '') {
-                //     if ($img = $this->request->getFile('image')) {
-                //         $imgname = $img->getName();
-                //         if ($img->isValid() && !$img->hasMoved()) {
-                //             $ext = explode('.', $imgname);
-                //             $ext = end($ext);
-                //             $newName = 'u_' . time() . '.' . $ext;
-                //             $img->move(FCPATH . 'assets/upload/users/', $newName);
-                //         }
-                //     }
-                //     $post['image'] = $newName;
-                // }
-                $post['name'] = $this->request->getPost('name');
+            } else {                $post['name'] = $this->request->getPost('name');
                 $post['email'] = $this->request->getPost('email');
                 $post['phone'] = $this->request->getPost('phone');
                 $post['status'] = $this->request->getPost('status');
@@ -175,7 +144,6 @@ class Profile extends BaseController
                     session()->setFlashdata(['message' => 'Something went wrong. Please Try After Sometimes...', 'type' => 'danger']);
                 }
                 return redirect()->to('admin/profile');
-
             }
         }
         $data['user'] = $this->commonmodel->getOneRecord('tbl_admin', ['user_id' => $id]);
