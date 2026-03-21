@@ -79,17 +79,17 @@ class Users extends BaseController
                 //return view('admin/users/add_user',$this->data);
             } else {
                 // print_r($_POST); exit;
-                
-                    if ($img = $this->request->getFile('image')) {
-                        $imgname = $img->getName();
-                        if ($img->isValid() && !$img->hasMoved()) {
-                            $ext = explode('.', $imgname);
-                            $ext = end($ext);
-                            $newName = 'u_' . time() . '.' . $ext;
-                            $img->move('assets/upload/users/', $newName);
-                        }
-                    
-                    $post['image'] = $newName;
+                if($_FILES['image']['name'] != ''){
+                  if($img = $this->request->getFile('image')){ 
+                      $imgname = $img->getName();
+                      if($img->isValid() && !$img->hasMoved()){
+                          $ext = explode('.',$imgname);
+                          $ext = end($ext);
+                          $newName = 'u_'.time().'.'.$ext;
+                          $img->move('./public/assets/upload/users/',$newName);
+                      }
+                  }
+                  $post['image'] = $newName;
                 }
                 $post['name'] = $this->request->getPost('name');
                 $post['email'] = $this->request->getPost('email');
@@ -193,9 +193,9 @@ class Users extends BaseController
 
                 $updated = $this->commonmodel->updateRecord('tbl_admin', $post, ['user_id' => $id]);
                 if ($updated) {
-                    session()->setFlashdata(['message' => 'User Updated Successfully', 'type' => 'success']);
+                    session()->setFlashdata(['message' => '<div class="status-badge">User Updated Successfully</div>', 'type' => 'success']);
                 } else {
-                    session()->setFlashdata(['message' => 'Something went wrong. Please Try After Sometimes...', 'type' => 'danger']);
+                    session()->setFlashdata(['message' => '<div class="status-badge bg-danger">Something went wrong. Please Try After Sometimes...</div>', 'type' => 'danger']);
                 }
                 return redirect()->to('admin/users');
             }

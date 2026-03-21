@@ -126,10 +126,8 @@
                                     <i class="bi bi-arrow-left-circle me-1"></i> Back
                                 </a>
                             </div>
-
                         </div>
                     </div>
-
                 </form>
             </div>
         </div>

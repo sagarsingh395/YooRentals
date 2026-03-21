@@ -1,140 +1,183 @@
-<?=$this->extend("admin/_layouts/master") ?>
-<?=$this->section("content") ?>
-<style>
-  .form-check .form-check-input {
-    margin-left: 5px;
-  }
+<?= $this->extend("admin/_layouts/master") ?>
+<?= $this->section("content") ?>
 
-  .form-group {
-    margin-bottom: 0.5rem;
-  }
+<!-- prettier-ignore -->
+<style>
+.form-check .form-check-input {
+    margin-left: 5px;
+}
+
+.form-group {
+    margin-bottom: .4rem;
+}
+
+.page-title {
+    font-size: 26px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.index-title {
+    color: #4e73df;
+    font-weight: 500;
+}
+
+.menu-row {
+    margin-bottom: 4px;
+    align-items: center;
+}
+
+.menu-name {
+    overflow-x: auto;
+}
+
+.menu-name label {
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.checkbox-group .form-check {
+    margin-bottom: 2px;
+}
+
+.menu-name::-webkit-scrollbar {
+    height: 4px;
+}
+
+.menu-name::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 5px;
+}
 </style>
 <div class="content-wrapper">
-  <div class="page-header">
-    <h3 class="page-title">
-      <!-- <span class="page-title-icon bg-gradient-primary text-white me-2">
-            <i class="mdi mdi-home"></i>
-            </span> --> Add Group
-    </h3>
-    <nav aria-label="breadcrumb">
-      <ul class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">
-          <a href="<?=base_url('admin/user-group')?>" class="btn btn-primary">Back</a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-  <?php if(session()->getFlashdata('message')){ ?>
-  <div class="alert alert-<?=session()->getFlashdata('type')?>">
-    <?=session()->getFlashdata('message')?>
-  </div>
-  <?php } ?>
-  <div class="card">
-    <div class="card-body">
-      <!-- <h4 class="card-title">Basic form elements</h4>
-                    <p class="card-description"> Basic form elements </p> -->
-      <form class="forms-sample">
-        <div class="form-group row">
-          <label for="exampleInputUsername2" class="col-sm-2 col-form-label">Group Name</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="exampleInputUsername2" placeholder="Username">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="exampleInputUsername2" class="col-sm-2 col-form-label">Add Privilege</label>
-          <div class="col-sm-10">
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" name="" id="all">
-              <label for="all" class="form-check-label">All Privilege</label>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-
-          <div class="offset-md-2 col-md-10">
-
-            <div class=" row">
-              <div class="col-md-3">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
-                  <label class="form-check-label" for="flexRadioDefault1">
-                    User Group
-                  </label>
-                </div>
-              </div>
-              <div class="col-md-9">
-                <div class="form-check">
-                  <div class="form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">Add</label>
-                  </div>
-                  <div class="form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                    <label class="form-check-label" for="inlineCheckbox2">Edit</label>
-                  </div>
-                  <div class="form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-                    <label class="form-check-label" for="inlineCheckbox3">Delete</label>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class=" row">
-              <div class="col-md-3">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
-                  <label class="form-check-label" for="flexRadioDefault1">
-                    User Group
-                  </label>
-                </div>
-              </div>
-              <div class="col-md-9">
-                <div class="form-check">
-                  <div class="form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">Add</label>
-                  </div>
-                  <div class="form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                    <label class="form-check-label" for="inlineCheckbox2">Edit</label>
-                  </div>
-                  <div class="form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-                    <label class="form-check-label" for="inlineCheckbox3">Delete</label>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label for="exampleInputUsername2" class="col-sm-2 col-form-label">Status</label>
-          <div class="col-sm-10">
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1"
-                checked>
-              <label class="form-check-label" for="exampleRadios1">
-                Active
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-              <label class="form-check-label" for="exampleRadios2">
-                Inactive
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
-        <a href="<?=base_url('admin/user-group') ?>" class="btn btn-light">Cancel</a>
-      </form>
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-2">
+        <h1 class="page-title mb-0">User Groups</h1>
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="<?= base_url('admin'); ?>">Admin</a></li>
+            <li class="breadcrumb-item active">add-group</li>
+        </ol>
     </div>
-  </div>
 
+    <!-- Card -->
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="index-title">Add Group</h5>
+            <a href="<?= base_url('admin/user-group') ?>" class="btn btn-primary btn-sm">Back</a>
+        </div>
+        <div class="card-body">
+            <?php if (session()->getFlashdata('message')) { ?>
+            <div class="alert alert-<?= session()->getFlashdata('type') ?>">
+                <?= session()->getFlashdata('message') ?>
+            </div>
+            <?php } ?>
+            <form action="<?= current_url(); ?>" method="post">
+                <?= csrf_field(); ?>
+                <!-- Group Name -->
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Group Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="group_name" placeholder="Group Name">
+                        <?= isset($validation) ? $validation->getError('group_name') : '' ?>
+                    </div>
+                </div>
+                <!-- Add Privilege -->
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Add Privilege</label>
+                    <div class="col-sm-10">
+                        <?php if (count($menulist) > 0) { ?>
+                        <!-- All Privilege -->
+                        <div class="form-check mb-2">
+                            <input type="checkbox" class="form-check-input" id="AllPrivilege">
+                            <label class="form-check-label">All Privilege</label>
+                        </div>
+                        <?php foreach ($menulist as $key => $menu) {
+                                $disable = ($menu->menu_id == 2) ? 'disabled' : '';
+                            ?>
+                        <div class="row menu-row">
+                            <!-- Menu Name -->
+                            <div class="col-md-3 menu-name">
+                                <div class="form-check">
+                                    <input class="form-check-input privilege-checkbox" type="checkbox"
+                                        name="menu_id[<?= $key ?>]" value="<?= $menu->menu_id ?>" <?= $disable ?>>
+                                    <label class="form-check-label">
+                                        <?= $menu->menu_name ?>
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- Functions -->
+                            <div class="col-md-9">
+                                <div class="checkbox-group">
+                                    <input type="hidden" name="crudid[<?= $key ?>][]" value="1">
+                                    <?php if ($menu->function != '') {
+                                                $value = 2;
+                                                $functionArr = explode(',', $menu->function);
+                                                foreach ($functionArr as $fun) { ?>
+                                    <div class="form-check">
+                                        <input class="form-check-input privilege-checkbox" type="checkbox"
+                                            name="crudid[<?= $key ?>][]" value="<?= $value ?>" <?= $disable ?>>
+                                        <label class="form-check-label"><?= $fun ?></label>
+                                    </div>
+                                    <?php $value++;
+                                                }
+                                            } ?>
+                                </div>
+                            </div>
+                        </div>
+                        <?php } ?>
+                        <?php } ?>
+                    </div>
+                </div>
+                <!-- Status -->
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Status</label>
+                    <div class="col-sm-10">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="status" value="1" checked>
+                            <label class="form-check-label">Active</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="status" value="0">
+                            <label class="form-check-label">Inactive</label>
+                        </div>
+                        <?= isset($validation) ? $validation->getError('status') : '' ?>
+                    </div>
+                </div>
+                <!-- Buttons -->
+                <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                <button type="reset" class="btn btn-secondary btn-sm">Reset</button>
+                <a href="<?= base_url('admin/user-group') ?>" class="btn btn-warning btn-sm">Cancel</a>
+            </form>
+        </div>
+    </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<?=$this->endSection()?>
+<script>
+// All Privilege
+$("#AllPrivilege").on("change", function() {
+    let checked = $(this).prop("checked");
+    $(".privilege-checkbox:not(:disabled)").prop("checked", checked);
+});
+
+$(".privilege-checkbox").on("change", function() {
+    if (!$(this).prop("checked")) {
+        $("#AllPrivilege").prop("checked", false);
+    } else {
+        let total = $(".privilege-checkbox:not(:disabled)").length;
+        let selected = $(".privilege-checkbox:not(:disabled):checked").length;
+
+        if (total === selected) {
+            $("#AllPrivilege").prop("checked", true);
+        }
+    }
+});
+</script>
+
+<?= $this->endSection() ?>

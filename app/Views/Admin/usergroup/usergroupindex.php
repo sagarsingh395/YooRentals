@@ -49,7 +49,7 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <div class="index-title">User Group Index</div>
+                <h5 class="index-title">User Group Index</h5>
                 <a href="<?= base_url('admin/add-group') ?>"
                     class="btn btn-primary btn-sm">Add User Group</a>
             </div>
@@ -67,9 +67,9 @@
                     <tbody>
 
                         <?php
-                        if (!empty($group)) {
+                        if (!empty($usersgrouplist)) {
                             $n = 1;
-                            foreach ($group as $list) {
+                            foreach ($usersgrouplist as $list) {
                         ?>
                                 <tr>
                                     <td><?= $n++; ?></td>
