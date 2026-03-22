@@ -99,10 +99,11 @@
                                 <?php } ?>
                             </td>
                             <td>
-                                <a href="<?= base_url('admin/edit_user/' . $list->group_id) ?>"
+                                <a href="<?= base_url('admin/edit-group/' . $list->group_id) ?>"
                                     class="action-icon edit-icon"><i class="mdi mdi-square-edit-outline"></i></a>
-                                <a href="<?= base_url('admin/delete_user/' . $list->group_id) ?>"
-                                    class="action-icon delete-icon"><i class="mdi mdi-delete"></i></a>
+                                <a href="<?= base_url('admin/delete-group/' . $list->group_id) ?>"
+                                    class="action-icon delete-icon" onclick="return confirm('Are you sure?');"><i
+                                        class="mdi mdi-delete"></i></a>
                             </td>
                         </tr>
                         <?php

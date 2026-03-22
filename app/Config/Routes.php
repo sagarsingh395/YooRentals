@@ -32,6 +32,9 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     /************************User Group**************************************** */
     $routes->get('admin/user-group', 'Admin\UserGroup::index');
     $routes->match(['get', 'post'], 'admin/add-group', 'Admin\UserGroup::add_group');
+    $routes->match(['get', 'post'], 'admin/edit-group/(:num)', 'Admin\UserGroup::edit_group/$1');
+    $routes->match(['get', 'post'], 'admin/delete-group/(:num)', 'Admin\UserGroup::delete_group/$1');
+
 
     /************************************Product*************************************** */
     $routes->get('admin/products', 'Admin\Product::index');

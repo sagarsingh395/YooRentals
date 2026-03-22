@@ -3,57 +3,57 @@
 
 <!-- prettier-ignore -->
 <style>
-.form-check .form-check-input {
-    margin-left: 5px;
-}
+    .form-check .form-check-input {
+        margin-left: 5px;
+    }
 
-.form-group {
-    margin-bottom: .4rem;
-}
+    .form-group {
+        margin-bottom: .4rem;
+    }
 
-.page-title {
-    font-size: 26px;
-    font-weight: 600;
-    white-space: nowrap;
-}
+    .page-title {
+        font-size: 26px;
+        font-weight: 600;
+        white-space: nowrap;
+    }
 
-.index-title {
-    color: #4e73df;
-    font-weight: 500;
-}
+    .index-title {
+        color: #4e73df;
+        font-weight: 500;
+    }
 
-.menu-row {
-    margin-bottom: 4px;
-    align-items: center;
-}
+    .menu-row {
+        margin-bottom: 4px;
+        align-items: center;
+    }
 
-.menu-name {
-    overflow-x: auto;
-}
+    .menu-name {
+        overflow-x: auto;
+    }
 
-.menu-name label {
-    white-space: nowrap;
-    display: inline-block;
-}
+    .menu-name label {
+        white-space: nowrap;
+        display: inline-block;
+    }
 
-.checkbox-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
+    .checkbox-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
 
-.checkbox-group .form-check {
-    margin-bottom: 2px;
-}
+    .checkbox-group .form-check {
+        margin-bottom: 2px;
+    }
 
-.menu-name::-webkit-scrollbar {
-    height: 4px;
-}
+    .menu-name::-webkit-scrollbar {
+        height: 4px;
+    }
 
-.menu-name::-webkit-scrollbar-thumb {
-    background: #ccc;
-    border-radius: 5px;
-}
+    .menu-name::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 5px;
+    }
 </style>
 <div class="content-wrapper">
     <!-- Header -->
@@ -89,45 +89,45 @@
                     <label class="col-sm-2 col-form-label">Add Privilege</label>
                     <div class="col-sm-10">
                         <?php if (count($menulist) > 0) { ?>
-                        <!-- All Privilege -->
-                        <div class="form-check mb-2">
-                            <input type="checkbox" class="form-check-input" id="AllPrivilege">
-                            <label class="form-check-label">All Privilege</label>
-                        </div>
-                        <?php foreach ($menulist as $key => $menu) {
+                            <!-- All Privilege -->
+                            <div class="form-check mb-2">
+                                <input type="checkbox" class="form-check-input" id="AllPrivilege">
+                                <label class="form-check-label">All Privilege</label>
+                            </div>
+                            <?php foreach ($menulist as $key => $menu) {
                                 $disable = ($menu->menu_id == 2) ? 'disabled' : '';
                             ?>
-                        <div class="row menu-row">
-                            <!-- Menu Name -->
-                            <div class="col-md-3 menu-name">
-                                <div class="form-check">
-                                    <input class="form-check-input privilege-checkbox" type="checkbox"
-                                        name="menu_id[<?= $key ?>]" value="<?= $menu->menu_id ?>" <?= $disable ?>>
-                                    <label class="form-check-label">
-                                        <?= $menu->menu_name ?>
-                                    </label>
-                                </div>
-                            </div>
-                            <!-- Functions -->
-                            <div class="col-md-9">
-                                <div class="checkbox-group">
-                                    <input type="hidden" name="crudid[<?= $key ?>][]" value="1">
-                                    <?php if ($menu->function != '') {
+                                <div class="row menu-row">
+                                    <!-- Menu Name -->
+                                    <div class="col-md-3 menu-name">
+                                        <div class="form-check">
+                                            <input class="form-check-input privilege-checkbox" type="checkbox"
+                                                name="menu_id[<?= $key ?>]" value="<?= $menu->menu_id ?>" <?= $disable ?>>
+                                            <label class="form-check-label">
+                                                <?= $menu->menu_name ?>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!-- Functions -->
+                                    <div class="col-md-9">
+                                        <div class="checkbox-group">
+                                            <input type="hidden" name="crudid[<?= $key ?>][]" value="1">
+                                            <?php if ($menu->function != '') {
                                                 $value = 2;
                                                 $functionArr = explode(',', $menu->function);
                                                 foreach ($functionArr as $fun) { ?>
-                                    <div class="form-check">
-                                        <input class="form-check-input privilege-checkbox" type="checkbox"
-                                            name="crudid[<?= $key ?>][]" value="<?= $value ?>" <?= $disable ?>>
-                                        <label class="form-check-label"><?= $fun ?></label>
-                                    </div>
-                                    <?php $value++;
+                                                    <div class="form-check">
+                                                        <input class="form-check-input privilege-checkbox" type="checkbox"
+                                                            name="crudid[<?= $key ?>][]" value="<?= $value ?>" <?= $disable ?>>
+                                                        <label class="form-check-label"><?= $fun ?></label>
+                                                    </div>
+                                            <?php $value++;
                                                 }
                                             } ?>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <?php } ?>
+                            <?php } ?>
                         <?php } ?>
                     </div>
                 </div>
@@ -156,24 +156,24 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-// All Privilege
-$("#AllPrivilege").on("change", function() {
-    let checked = $(this).prop("checked");
-    $(".privilege-checkbox:not(:disabled)").prop("checked", checked);
-});
+    // All Privilege
+    $("#AllPrivilege").on("change", function() {
+        let checked = $(this).prop("checked");
+        $(".privilege-checkbox:not(:disabled)").prop("checked", checked);
+    });
 
-$(".privilege-checkbox").on("change", function() {
-    if (!$(this).prop("checked")) {
-        $("#AllPrivilege").prop("checked", false);
-    } else {
-        let total = $(".privilege-checkbox:not(:disabled)").length;
-        let selected = $(".privilege-checkbox:not(:disabled):checked").length;
+    $(".privilege-checkbox").on("change", function() {
+        if (!$(this).prop("checked")) {
+            $("#AllPrivilege").prop("checked", false);
+        } else {
+            let total = $(".privilege-checkbox:not(:disabled)").length;
+            let selected = $(".privilege-checkbox:not(:disabled):checked").length;
 
-        if (total === selected) {
-            $("#AllPrivilege").prop("checked", true);
+            if (total === selected) {
+                $("#AllPrivilege").prop("checked", true);
+            }
         }
-    }
-});
+    });
 </script>
 
 <?= $this->endSection() ?>

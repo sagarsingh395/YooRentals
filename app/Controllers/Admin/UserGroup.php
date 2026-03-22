@@ -69,89 +69,81 @@ class UserGroup extends BaseController
         return view('Admin/usergroup/add_group', $this->data);
     }
 
-    public function view_user($id)
+    public function edit_group($id)
     {
-        echo $id;
-    }
-    public function edit_user($id)
-    {
-        if ($this->request->getMethod() == 'POST') {
-            // echo "<pre>"; print_r($_FILES); exit;
-            $validation = $this->validate([
-                'name' => [
-                    'rules' => 'required',
-                    'errors' => [
-                        'required' => 'Your Full name is required'
-                    ]
-                ],
-                'email' => [
-                    'rules' => 'required|valid_email',
-                    'errors' => [
-                        'required' => 'Email is required',
-                        'valid_email' => 'You must enter a valid email',
-                        //   'is_unique'=>'Email already taken'
-                    ]
-                ],
-                'phone' => [
-                    'rules' => 'required|numeric|min_length[10]|max_length[10]',
-                    'errors' => [
-                        'required' => 'Phone is required',
-                        'numeric' => 'You must enter numeric value',
-                        'min_length' => 'Phone Number must be 10 digit in length',
-                        'max_length' => 'Phone Number must not have more than 10 digit in length'
-                    ]
-                ],
+        if ($this->request->getMethod() === 'POST') {
+            $validation = \Config\Services::validation();
 
-
-
-            ]);
-            if (!$validation) {
-                $data['validation'] = $this->validator;
-                //return view('admin/users/add_user',$this->data);
-            } else {
-                // print_r($_POST); exit;
-                if ($_FILES['image']['name'] != '') {
-                    if ($img = $this->request->getFile('image')) {
-                        $imgname = $img->getName();
-                        if ($img->isValid() && !$img->hasMoved()) {
-                            $ext = explode('.', $imgname);
-                            $ext = end($ext);
-                            $newName = 'u_' . time() . '.' . $ext;
-                            $img->move('./public/assets/upload/users/', $newName);
-                        }
-                    }
-                    $post['image'] = $newName;
-                }
-                $post['name'] = $this->request->getPost('name');
-                $post['email'] = $this->request->getPost('email');
-                $post['phone'] = $this->request->getPost('phone');
-                $post['status'] = $this->request->getPost('status');
-                $post['ip_address'] = $this->request->getIPAddress();
-                $post['update_by'] = session('user_id');
-                $post['updated'] = date('Y-m-d H:i:s');
-
-                $updated = $this->commonmodel->updateRecord('tbl_admin', $post, ['user_id' => $id]);
-                if ($updated) {
-                    session()->setFlashdata(['message' => 'User Updated Successfully', 'type' => 'success']);
+            $validation->setRule('group_name', 'Group Name', 'required', ['required' => 'Group name is required']);
+            $validation->setRule('status', 'Status', 'required', ['required' => 'Status is required']);
+            if ($validation->withRequest($this->request)->run()) {
+                $post = $this->request->getPost();
+                $id = $this->request->getPost('id');
+                $data = array();
+                $data['group_name'] = $this->request->getPost('group_name');
+                $data['status'] = $this->request->getPost('status');
+                $data['updated_at'] = date('Y-m-d');
+                $updated = $this->commonmodel->updateRecord('tbl_group', $data, ['group_id' => $id]);
+                $loginId = session('user_id');
+                //echo $loginId; exit;
+                if ($loginId == 1 || $loginId == 20) {
+                    $deleteAllPrivilege = $this->commonmodel->deleteRecord('tbl_group_privilege', ['group_id' => $id, 'menu_id !=' => 2]);
                 } else {
-                    session()->setFlashdata(['message' => 'Something went wrong. Please Try After Sometimes...', 'type' => 'danger']);
+                    $deleteAllPrivilege = $this->commonmodel->deleteRecord('tbl_group_privilege', ['group_id' => $id]);
                 }
-                return redirect()->to('admin/users');
+                if (isset($post['menu_id']) && isset($post['crudid'])) {
+                    foreach ($post['menu_id'] as $key => $menuid) {
+                        $prvlgarr = array();
+                        $prvlgarr['group_id'] = $id;
+                        $prvlgarr['menu_id'] = $menuid;
+                        $prvlgarr['crud_ids'] = implode(',', $post['crudid'][$key]);
+                        $prvlgarr['added_at'] = date('Y-m-d');
+                        $inserted = $this->commonmodel->insertRecord('tbl_group_privilege', $prvlgarr);
+                    }
+                    //echo '<pre>';print_r($post);exit;	
+                }
+                if ($updated) {
+                    session()->setFlashdata(['message' => 'User Group Updated Successfully', 'type' => 'success']);
+                } else if (isset($inserted) || $deleteAllPrivilege) {
+                    session()->setFlashdata(['message' => 'Privilege Updated Successfully', 'type' => 'success']);
+                } else {
+                    session()->setFlashdata(['message' => 'Something went wrong.', 'type' => 'danger']);
+                }
+                return redirect()->to(base_url('admin/user-group'));
+            } else {
+                $this->data['validation'] = $validation->getErrors();
             }
         }
-        $data['group'] = $this->commonmodel->getOneRecord('tbl_group', ['group_id' => $id]);
-        return view('Admin/usergroup/edit_group', $data);
+        $this->data['prev_details'] = $this->commonmodel->getOneRecord('tbl_group', array('group_id' => $id));
+        $this->data['menulist'] = $this->commonmodel->getAllRecord('tbl_group_menu_list', ['status' => 1]);
+        return view('Admin/usergroup/edit_group', $this->data);
     }
-    public function delete_user($id)
+
+    public function deletegroup($id)
     {
         if ($id) {
-            $updated = $this->commonmodel->updateRecord('tbl_admin', ['status' => 2], ['user_id' => $id]);
+            $updated = $this->commonmodel->updateRecord('tbl_group', ['status' => 2], ['group_id' => $id]);
             if ($updated) {
-                session()->setFlashdata(['message' => 'User deleted Successfully', 'type' => 'success']);
+                session()->setFlashdata(['message' => 'Group deleted Successfully', 'type' => 'success']);
             } else {
                 session()->setFlashdata(['message' => 'Something went wrong. Please Try After Sometimes...', 'type' => 'danger']);
             }
         }
-        return redirect()->to(base_url('admin/users'));
+        // return redirect()->to(base_url('admin/user-group'));
+    }
+    public function delete_group($id = false)
+    {
+        if ($id == 1) {
+            session()->setFlashdata(['message' => 'Admin Group can not delete!', 'type' => 'danger']);
+            return redirect()->to('admin/user-groups');
+        }
+        $deleteAllPrivilege = $this->commonmodel->deleteRecord('tbl_group_privilege', ['group_id' => $id]);
+        $deleted = $this->commonmodel->deleteRecord('tbl_group', array('group_id' => $id));
+        if ($deleted && $deleteAllPrivilege) {
+            session()->setFlashdata(['message' => 'Group deleted successfully', 'type' => 'success']);
+        } else {
+            session()->setFlashdata(['message' => 'Something went wrong.', 'type' => 'danger']);
+        }
+        return redirect()->to(base_url('admin/user-group'));
     }
 }
