@@ -72,21 +72,18 @@
             <a href="<?= base_url('admin/user-group') ?>" class="btn btn-primary btn-sm">Back</a>
         </div>
         <div class="card-body">
-            <?php if (session()->getFlashdata('message')) { ?>
-            <div class="alert alert-<?= session()->getFlashdata('type') ?>">
-                <?= session()->getFlashdata('message') ?>
-            </div>
-            <?php } ?>
-            <form action="<?= current_url(); ?>" method="post">
+            <form action="<?= current_url(); ?>" method="POST">
                 <?= csrf_field(); ?>
                 <!-- Group Name -->
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Group Name</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="group_name" placeholder="Group Name">
-                        <?= isset($validation) ? $validation->getError('group_name') : '' ?>
+                        <span
+                            class="text-danger"><?= isset($validation['group_name']) ? $validation['group_name'] : '' ?></span>
                     </div>
                 </div>
+
                 <!-- Add Privilege -->
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Add Privilege</label>
@@ -146,7 +143,6 @@
                             <input class="form-check-input" type="radio" name="status" value="0">
                             <label class="form-check-label">Inactive</label>
                         </div>
-                        <?= isset($validation) ? $validation->getError('status') : '' ?>
                     </div>
                 </div>
                 <!-- Buttons -->

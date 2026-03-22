@@ -3,9 +3,9 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
-use App\Models\AuthModel;
 use App\Libraries\Hash;
 use CodeIgniter\HTTP\RedirectResponse;
+// use App\Models\AuthModel;
 
 class UserGroup extends BaseController
 {
@@ -14,33 +14,35 @@ class UserGroup extends BaseController
     public $commonmodel;
     public function __construct()
     {
-        $this->authmodel = model('App\Models\AuthModel', false);
+        // $this->authmodel = model('App\Models\AuthModel', false);
         $this->commonmodel = model('App\Models\CommonModel', false);
     }
     public function index()
     {
         $data = [];
-        $data['usersgrouplist'] = $this->commonmodel->getAllRecord('tbl_group', ['status !=' => 2], ['group_id', 'ASC']);
+        $data['usersgrouplist'] = $this->commonmodel->getAllRecord('tbl_group', null, ['group_id', 'ASC']);
         return view('Admin/usergroup/usergroupindex', $data);
     }
     public function user_groups()
     {
         $this->data['usersgrouplist'] = $this->commonmodel->getAllRecord('tbl_group');
-        return view("admin/usergroup/usergroupindex", $this->data);
+        return view("Admin/usergroup/usergroupindex", $this->data);
     }
+
     public function add_group()
     {
-        if ($this->request->getMethod() === 'post') {
+        if ($this->request->getMethod() === 'POST') {
             $validation = \Config\Services::validation();
 
             $validation->setRule('group_name', 'Group Name', 'required', ['required' => 'Group name is required']);
-            $validation->setRule('status', 'Status', 'required', ['required' => 'Status is required']);
+            // $validation->setRule('status', 'Status', 'required', ['required' => 'Status is required']);
             if ($validation->withRequest($this->request)->run()) {
                 $post = $this->request->getPost();
                 $data = array();
                 $data['group_name'] = $this->request->getPost('group_name');
                 $data['status'] = $this->request->getPost('status');
-                $data['created_at'] = date('Y-m-d');
+                $data['create_at'] = date('Y-m-d');
+                $data['updated_at'] = date('Y-m-d');
                 $groupId = $this->commonmodel->insertRecord('tbl_group', $data);
                 if (isset($post['menu_id']) && isset($post['crudid'])) {
                     foreach ($post['menu_id'] as $key => $menuid) {
@@ -51,9 +53,7 @@ class UserGroup extends BaseController
                         $prvlgarr['added_at'] = date('Y-m-d');
                         $this->commonmodel->insertRecord('tbl_group_privilege', $prvlgarr);
                     }
-                    echo '<pre>';
-                    print_r($post);
-                    exit;
+                    //echo '<pre>';print_r($post);exit;	
                 }
                 if ($groupId) {
                     session()->setFlashdata(['message' => 'User Group Added Successfully', 'type' => 'success']);
@@ -61,16 +61,14 @@ class UserGroup extends BaseController
                     session()->setFlashdata(['message' => 'Something went wrong. Please Try After Sometimes...', 'type' => 'danger']);
                 }
                 return redirect()->to(base_url('admin/user-group'));
-                // return redirect()->to('admin/user-group');
             } else {
                 $this->data['validation'] = $validation->getErrors();
-                // $this->data['validation'] = $validation;
             }
         }
         $this->data['menulist'] = $this->commonmodel->getAllRecord('tbl_group_menu_list', ['status' => 1]);
-        // return view('admin/users/add_group', $this->data);
         return view('Admin/usergroup/add_group', $this->data);
     }
+
     public function view_user($id)
     {
         echo $id;
