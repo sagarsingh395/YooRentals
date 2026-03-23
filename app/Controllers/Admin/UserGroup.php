@@ -5,7 +5,7 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 use App\Libraries\Hash;
 use CodeIgniter\HTTP\RedirectResponse;
-// use App\Models\AuthModel;
+use App\Models\AuthModel;
 
 class UserGroup extends BaseController
 {
@@ -14,7 +14,7 @@ class UserGroup extends BaseController
     public $commonmodel;
     public function __construct()
     {
-        // $this->authmodel = model('App\Models\AuthModel', false);
+        $this->authmodel = model('App\Models\AuthModel', false);
         $this->commonmodel = model('App\Models\CommonModel', false);
     }
     public function index()
