@@ -13,6 +13,7 @@ class CommonModel extends Model
     private $roleTbl;
     private $menuTbl;
     private $privilegeTbl;
+    public $settingTbl;
     public function __construct()
     {
         $this->db = \Config\Database::connect();
@@ -20,6 +21,7 @@ class CommonModel extends Model
         $this->roleTbl = 'tbl_group';
         $this->menuTbl = 'tbl_group_menu_list';
         $this->privilegeTbl = 'tbl_group_privilege';
+        $this->settingTbl = 'tbl_setting';
     }
     public function insertRecord($table, $data)
     {
@@ -68,6 +70,22 @@ class CommonModel extends Model
         $builder = $this->db->table($table);
         $builder->where($whereArr);
         $result = $builder->delete();
+        return $result;
+    }
+    public function get_setting($id = '')
+    {
+        $builder = $this->db->table($this->settingTbl);
+        $builder->where('id', $id);
+        $query = $builder->get();
+        $result = $query->getRow();
+        return $result;
+    }
+    public function update_setting($data, $id)
+    {
+        $builder = $this->db->table($this->settingTbl);
+        $builder->where('id', $id);
+        //$query = $builder->get();
+        $result = $builder->update($data);
         return $result;
     }
 }

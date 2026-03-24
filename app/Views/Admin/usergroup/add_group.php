@@ -91,11 +91,14 @@
                         <?php if (count($menulist) > 0) { ?>
                             <!-- All Privilege -->
                             <div class="form-check mb-2">
-                                <input type="checkbox" class="form-check-input" id="AllPrivilege">
+                                <input type="checkbox" class="form-check-input" id="AllPrivilege" name="" value="">
                                 <label class="form-check-label">All Privilege</label>
                             </div>
                             <?php foreach ($menulist as $key => $menu) {
-                                $disable = ($menu->menu_id == 2) ? 'disabled' : '';
+                                $disable = '';
+                                if ($menu->menu_id == 2) {
+                                    $disable = 'disabled';
+                                }
                             ?>
                                 <div class="row menu-row">
                                     <!-- Menu Name -->
@@ -118,8 +121,8 @@
                                                 foreach ($functionArr as $fun) { ?>
                                                     <div class="form-check">
                                                         <input class="form-check-input privilege-checkbox" type="checkbox"
-                                                            name="crudid[<?= $key ?>][]" value="<?= $value ?>" <?= $disable ?>>
-                                                        <label class="form-check-label"><?= $fun ?></label>
+                                                            name="crudid[<?= $key ?>][]" id="<?= $fun . $key ?>" value="<?= $value ?>" <?= $disable ?>>
+                                                        <label class="form-check-label" data-toggle="tooltip" data-placement="right" title="<?= $value ?>"><?= $fun ?></label>
                                                     </div>
                                             <?php $value++;
                                                 }
@@ -133,7 +136,7 @@
                 </div>
                 <!-- Status -->
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Status</label>
+                    <label for="image" class="col-sm-2 col-form-label">Status</label>
                     <div class="col-sm-10">
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="status" value="1" checked>
@@ -143,6 +146,7 @@
                             <input class="form-check-input" type="radio" name="status" value="0">
                             <label class="form-check-label">Inactive</label>
                         </div>
+                        <span class="text-danger"><?= isset($validation['status']) ? $validation['status'] : '' ?></span>
                     </div>
                 </div>
                 <!-- Buttons -->
@@ -158,20 +162,13 @@
 <script>
     // All Privilege
     $("#AllPrivilege").on("change", function() {
-        let checked = $(this).prop("checked");
-        $(".privilege-checkbox:not(:disabled)").prop("checked", checked);
+        $("input[type=checkbox]").prop("checked", $(this).prop("checked"));
+
     });
 
     $(".privilege-checkbox").on("change", function() {
         if (!$(this).prop("checked")) {
             $("#AllPrivilege").prop("checked", false);
-        } else {
-            let total = $(".privilege-checkbox:not(:disabled)").length;
-            let selected = $(".privilege-checkbox:not(:disabled):checked").length;
-
-            if (total === selected) {
-                $("#AllPrivilege").prop("checked", true);
-            }
         }
     });
 </script>

@@ -35,7 +35,7 @@ class UserGroup extends BaseController
             $validation = \Config\Services::validation();
 
             $validation->setRule('group_name', 'Group Name', 'required', ['required' => 'Group name is required']);
-            // $validation->setRule('status', 'Status', 'required', ['required' => 'Status is required']);
+            $validation->setRule('status', 'Status', 'required', ['required' => 'Status is required']);
             if ($validation->withRequest($this->request)->run()) {
                 $post = $this->request->getPost();
                 $data = array();
@@ -119,18 +119,6 @@ class UserGroup extends BaseController
         return view('Admin/usergroup/edit_group', $this->data);
     }
 
-    public function deletegroup($id)
-    {
-        if ($id) {
-            $updated = $this->commonmodel->updateRecord('tbl_group', ['status' => 2], ['group_id' => $id]);
-            if ($updated) {
-                session()->setFlashdata(['message' => 'Group deleted Successfully', 'type' => 'success']);
-            } else {
-                session()->setFlashdata(['message' => 'Something went wrong. Please Try After Sometimes...', 'type' => 'danger']);
-            }
-        }
-        // return redirect()->to(base_url('admin/user-group'));
-    }
     public function delete_group($id = false)
     {
         if ($id == 1) {
@@ -145,5 +133,42 @@ class UserGroup extends BaseController
             session()->setFlashdata(['message' => 'Something went wrong.', 'type' => 'danger']);
         }
         return redirect()->to(base_url('admin/user-group'));
+    }
+
+   /*******************************************Settings************************************** */
+    public function setting()
+    {
+        if ($this->request->getMethod() === 'POST' && $_POST['submit'] == 'gen_setting'){
+            //print_r($_POST); exit;
+            $data = array();
+            $data = $_POST;
+            unset($data['submit']);
+            /*if(isset($_FILES['logo']['name']) && $_FILES['logo']['name'] != ''){
+                if($img = $this->request->getFile('logo')){ 
+                    $imgname = $img->getName();
+                    if($img->isValid() && !$img->hasMoved()){
+                        $ext = explode('.',$imgname);
+                        $ext = end($ext);
+                        $newName = 'logo'.time().'.'.$ext;
+                        $img->move('./public/assets/upload/images/',$newName);
+                    }
+                }
+                $data['logo'] = $newName;
+            }*/
+            $updated = $this->commonmodel->update_setting($data, 1);
+            if($updated){
+                // $this->session->setFlashdata(['message'=>'Setting Update Successfully','type'=>'success']);
+                return redirect()->to(base_url('admin/setting'));
+            }else{
+                // $this->session->setFlashdata(['message'=>'Something went wrong.','type'=>'danger']);
+                return redirect()->to(base_url('admin/setting'));
+            }
+        }else if(isset($_POST['submit']) && $_POST['submit'] == 'msg_setting'){
+            print_r($_POST); exit;
+        }else{
+            $this->data['settings'] = $this->commonmodel->get_setting(1);
+            return view("admin/setting/setting_edit",$this->data);
+        }
+        
     }
 }

@@ -58,7 +58,7 @@ class Auth extends BaseController
                         'image' => $user_info->image,
                         'status' => $user_info->status,
                         'userlogin' => true,
-                        'role' => 'admin'
+                        'role' => 'admin',
                     );
                     session()->set($sessionData);
                     return redirect()->to('/admin/dashboard');
@@ -78,7 +78,7 @@ class Auth extends BaseController
             $loginItemArray = ['user_id', 'name', 'email', 'phone', 'address', 'image', 'status', 'userlogin'];
             session()->remove($loginItemArray);
             //session()->destroy();
-            return redirect()->to('/admin?access=out')->with('message', '<div class="d-flex justify-content-center alert alert-danger">You are logged out</div>');
+            return redirect()->to('/admin?access=out')->with('message', '<div class="d-flex justify-content-center alert alert-success">You are logged out</div>');
         }
         return redirect()->back();
     }

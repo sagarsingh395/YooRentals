@@ -89,8 +89,9 @@
                                 </td>
                                 <td>
                                     <a href="<?= base_url('admin/view_user/' . $list->user_id) ?>" class="btn btn-primary btn-sm"><i class="bi bi-eye"></i> View</a>
-                                    <a href="<?= base_url('admin/edit_user/' . $list->user_id) ?>" class="btn btn-info btn-sm"><i class="bi bi-pencil"></i> Edit</a>
-                                    <a href="<?= base_url('admin/delete_user/' . $list->user_id) ?>" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Delete</a>
+                                        <a href="<?= base_url('admin/edit_user/' . $list->user_id) ?>" class="btn btn-info btn-sm"><i class="bi bi-pencil"></i> Edit</a>
+                                        <a href="<?= base_url('admin/delete_user/' . $list->user_id) ?>"
+                                            class="btn btn-danger btn-sm" onclick="return confirm('Are You Sure?')">Delete</a>                                   
                                 </td>
                             </tr>
                     <?php }
