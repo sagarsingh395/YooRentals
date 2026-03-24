@@ -5,6 +5,7 @@ use App\Models\AuthModel;
 if (!function_exists('is_privilege')) {
     function is_privilege($menu_id, $functionId = null)
     {
+        // $groupId = session()->get('group_id') ?? 1;
         if (session()->has('userlogin')) {
             $auth = model('App\Models\AuthModel', false);
             $authenticData = $auth->is_user_privilege(session('group_id'), $menu_id, $functionId);
