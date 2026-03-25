@@ -25,6 +25,9 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->match(['get', 'post'], '/admin/dashboard', 'Admin\Dashboard::index');
     $routes->get('admin/logout', 'Admin\Auth::logout');
 
+    /**************************Fro Testing************************************** */
+    $routes->match(['get', 'post'], '/testpdf', 'Test::test_pdf');
+    $routes->match(['get', 'post'], '/exportexcel', 'Test::exportExcel');
     /************************************* USER ROUTES *************************************/
 
     $routes->get('admin/users', 'Admin\Users::index');
