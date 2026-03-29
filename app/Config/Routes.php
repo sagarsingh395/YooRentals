@@ -5,18 +5,18 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-/************************************* Error *************************************/
+/******************************Error**************************************************/
 // $routes->get('test403', function() {return view('admin/order/view_order');});
 $routes->get('forbidden', 'ErrorControllers::forbidden');
 
-/*************************************Public Routes (no auth required)*************************************/
+/*****************************Public Routes (no auth required)************************/
 $routes->get('/', 'Home::index');
 $routes->get('/product/(:any)', 'Home::product_details/$1');
 $routes->match(['get', 'post'], '/add_to_cart', 'Home::add_to_cart');
 $routes->match(['get', 'post'], '/checkout', 'Home::checkout');
 $routes->match(['get', 'post'], '/test', 'Home::test');
 
-/*************************************authentication-failed*************************************/
+/*****************************authentication-failed*************************************/
 $routes->get('/authentication-failed', function () {
     return view('admin/auth-fail');
 });
@@ -25,11 +25,13 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->match(['get', 'post'], '/admin/dashboard', 'Admin\Dashboard::index');
     $routes->get('admin/logout', 'Admin\Auth::logout');
 
-    /**************************Fro Testing************************************** */
+    /**************************For Testing(pdf,excel)*************************************/
     $routes->match(['get', 'post'], '/testpdf', 'Test::test_pdf');
     $routes->match(['get', 'post'], '/exportexcel', 'Test::exportExcel');
-    /************************************* USER ROUTES *************************************/
-
+    /**************************For Testing(payment)***************************************/
+    $routes->match(['get', 'post'], '/create-order', 'Home::createOrder');
+    $routes->match(['get', 'post'], '/capture-order', 'Home::captureOrder');
+    /***************************USER ROUTES***********************************************/
     $routes->get('admin/users', 'Admin\Users::index');
     $routes->match(['get', 'post'], 'admin/add_user', 'Admin\Users::add_user');
     $routes->match(['get', 'post'], 'admin/edit_user/(:num)', 'Admin\Users::edit_user/$1');
@@ -37,15 +39,21 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->match(['get', 'post'], 'admin/delete_user/(:num)', 'Admin\Users::delete_user/$1');
     $routes->match(['get', 'post'], 'admin/doDelete/(:num)', 'Admin\Users::doDelete/$1');
 
-    /************************User Group**************************************** */
+    /**************************Services**************************************************/
+    $routes->get('admin/service', 'Service\Services::index');
+    $routes->match(['get', 'post'], 'admin/add-service', 'Service\Services::add_service');
+    $routes->match(['get', 'post'], 'admin/edit-service/(:num)', 'Service\Services::edit_service/$1');
+    $routes->match(['get', 'post'], 'admin/delete-service/(:num)', 'Service\Services::delete_service/$1');
+
+    /**************************User Group************************************************/
     $routes->get('admin/user-group', 'Admin\UserGroup::index');
     $routes->match(['get', 'post'], 'admin/add-group', 'Admin\UserGroup::add_group');
     $routes->match(['get', 'post'], 'admin/edit-group/(:num)', 'Admin\UserGroup::edit_group/$1');
     $routes->match(['get', 'post'], 'admin/delete-group/(:num)', 'Admin\UserGroup::delete_group/$1');
 
-    /************************User Group**************************************** */
+    /**************************Setting***************************************************/
     $routes->match(['get', 'post'], 'admin/setting', 'Admin\UserGroup::setting');
-    /************************************Product*************************************** */
+    /***************************Product**************************************************/
     $routes->get('admin/products', 'Admin\Product::index');
     $routes->match(['get', 'post'], 'admin/product-cu', 'Admin\Product::add_edit_product');
     $routes->match(['get', 'post'], 'admin/product-cu/(:num)', 'Admin\Product::add_edit_product/$1');

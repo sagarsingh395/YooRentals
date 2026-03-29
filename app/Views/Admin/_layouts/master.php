@@ -19,8 +19,8 @@
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
-    <!-- Layout styles -->
     <link rel="stylesheet" href="<?= base_url('assets/admin/css/style.css') ?>">
+    <!-- Layout styles -->
     <!-- End layout styles -->
     <link rel="shortcut icon" href="<?= base_url('assets/admin/images/logo1a.png') ?>" />
 </head>

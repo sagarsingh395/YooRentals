@@ -121,8 +121,10 @@
                                                 foreach ($functionArr as $fun) { ?>
                                                     <div class="form-check">
                                                         <input class="form-check-input privilege-checkbox" type="checkbox"
-                                                            name="crudid[<?= $key ?>][]" id="<?= $fun . $key ?>" value="<?= $value ?>" <?= $disable ?>>
-                                                        <label class="form-check-label" data-toggle="tooltip" data-placement="right" title="<?= $value ?>"><?= $fun ?></label>
+                                                            name="crudid[<?= $key ?>][]" id="<?= $fun . $key ?>" value="<?= $value ?>"
+                                                            <?= $disable ?>>
+                                                        <label class="form-check-label" data-toggle="tooltip" data-placement="right"
+                                                            title="<?= $value ?>"><?= $fun ?></label>
                                                     </div>
                                             <?php $value++;
                                                 }
@@ -146,7 +148,8 @@
                             <input class="form-check-input" type="radio" name="status" value="0">
                             <label class="form-check-label">Inactive</label>
                         </div>
-                        <span class="text-danger"><?= isset($validation['status']) ? $validation['status'] : '' ?></span>
+                        <span
+                            class="text-danger"><?= isset($validation['status']) ? $validation['status'] : '' ?></span>
                     </div>
                 </div>
                 <!-- Buttons -->

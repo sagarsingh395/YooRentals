@@ -1,6 +1,5 @@
 <?= $this->extend("admin/_layouts/master") ?>
 <?= $this->section("content") ?>
-<?= $this->include('pluging'); ?>
 
 <div class="content-wrapper">
     <div class="page-header">
@@ -24,7 +23,7 @@
                     <li class="breadcrumb-item active" aria-current="page">
                         <?php if (is_privilege(1, 2)) { ?>
                         <a href="<?= base_url('admin/add_user') ?>" class="btn btn-primary"><i
-                                class="bi bi-person-plus-fill"></i> Add User</a>
+                                class="mdi mdi-account-plus"></i> Add User</a>
                         <?php } ?>
                     </li>
                 </ul>

@@ -94,15 +94,16 @@
             <h2 class="section-title">Popular Rooms</h2>
             <div class="row g-4">
                 <?php for ($i = 1; $i <= 6; $i++): ?>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="<?= base_url('assets/users/images/rooms/room' . $i . '.jpeg') ?>" class="card-img-top">
-                            <div class="card-body">
-                                <h5>Room <?= $i ?></h5>
-                                <button class="btn btn-primary w-100">Book Now</button>
-                            </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="<?= base_url('assets/users/images/rooms/room' . $i . '.jpeg') ?>"
+                            class="card-img-top">
+                        <div class="card-body">
+                            <h5>Room <?= $i ?></h5>
+                            <a href="<?= base_url('booking') ?>" class="btn btn-primary w-100">Book Now</a>
                         </div>
                     </div>
+                </div>
                 <?php endfor; ?>
             </div>
         </div>
@@ -114,15 +115,15 @@
             <h2 class="section-title">Rental Cars</h2>
             <div class="row g-4">
                 <?php for ($i = 1; $i <= 6; $i++): ?>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="<?= base_url('assets/users/images/cars/car' . $i . '.png') ?>" class="card-img-top">
-                            <div class="card-body">
-                                <h5>Car <?= $i ?></h5>
-                                <button class="btn btn-primary w-100">Book Now</button>
-                            </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="<?= base_url('assets/users/images/cars/car' . $i . '.png') ?>" class="card-img-top">
+                        <div class="card-body">
+                            <h5>Car <?= $i ?></h5>
+                            <button class="btn btn-primary w-100">Book Now</button>
                         </div>
                     </div>
+                </div>
                 <?php endfor; ?>
             </div>
         </div>
@@ -134,15 +135,15 @@
             <h2 class="section-title">Marriage Halls</h2>
             <div class="row g-4">
                 <?php for ($i = 1; $i <= 6; $i++): ?>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="<?= base_url('assets/users/images/halls/hall' . $i . '.png') ?>" class="card-img-top">
-                            <div class="card-body">
-                                <h5>Hall <?= $i ?></h5>
-                                <button class="btn btn-primary w-100">Book Now</button>
-                            </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="<?= base_url('assets/users/images/halls/hall' . $i . '.png') ?>" class="card-img-top">
+                        <div class="card-body">
+                            <h5>Hall <?= $i ?></h5>
+                            <button class="btn btn-primary w-100">Book Now</button>
                         </div>
                     </div>
+                </div>
                 <?php endfor; ?>
             </div>
         </div>
@@ -234,35 +235,35 @@
     </footer>
 
     <style>
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            align-items: center;
-            justify-content: center;
-        }
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 2000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        align-items: center;
+        justify-content: center;
+    }
 
-        .modal-content {
-            background: #fff;
-            padding: 25px;
-            border-radius: 10px;
-            width: 100%;
-            max-width: 400px;
-            position: relative;
-        }
+    .modal-content {
+        background: #fff;
+        padding: 25px;
+        border-radius: 10px;
+        width: 100%;
+        max-width: 400px;
+        position: relative;
+    }
 
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 22px;
-            cursor: pointer;
-        }
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 22px;
+        cursor: pointer;
+    }
     </style>
 
 
@@ -283,25 +284,25 @@
     </div>
 
     <script>
-        function showModal(modalId) {
-            document.getElementById(modalId).style.display = 'flex';
-        }
+    function showModal(modalId) {
+        document.getElementById(modalId).style.display = 'flex';
+    }
 
-        function hideModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
+    function hideModal(modalId) {
+        document.getElementById(modalId).style.display = 'none';
+    }
 
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.style.display = 'none';
-            }
+    window.onclick = function(event) {
+        if (event.target.classList.contains('modal')) {
+            event.target.style.display = 'none';
         }
+    }
 
-        function handleLogin(event) {
-            event.preventDefault(); // IMPORTANT: page reload रोकता है
-            alert("Login Successful (Demo)");
-            hideModal('loginModal');
-        }
+    function handleLogin(event) {
+        event.preventDefault(); // IMPORTANT: page reload रोकता है
+        alert("Login Successful (Demo)");
+        hideModal('loginModal');
+    }
     </script>
 
 </body>

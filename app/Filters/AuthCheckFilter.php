@@ -5,7 +5,7 @@ namespace App\Filters;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Filters\FilterInterface;
-use App\Models\Admin\Auth_model;
+use App\Models\Admin\AuthModel;
 
 class AuthCheckFilter implements FilterInterface
 {
@@ -14,10 +14,10 @@ class AuthCheckFilter implements FilterInterface
         $msg = '';
         if (!session()->has('userlogin')) {
             if (url_is('admin/*')) {
-                $msg = '<div class="alert alert-danger">You must be logged in!</div>';
+                $msg = '<div class="d-flex justify-content-center alert alert-danger">You must be logged in!</div>';
             }
             //return redirect()->to('/404')->with('message', $msg);
-            return redirect()->to('/pineapple?access=out')->with('message', $msg);
+            return redirect()->to('/admin?access=out')->with('message', $msg);
         } else {
             $menuId = $this->check_privilege();
             if (! $menuId) {

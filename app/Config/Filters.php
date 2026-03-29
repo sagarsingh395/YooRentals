@@ -75,10 +75,12 @@ class Filters extends BaseFilters
     public array $globals = [
         'before' => [
             // 'honeypot',
-            'csrf' => ['except'=>[
-                            '/add_to_cart',
-                        ]
-                    ],
+            'csrf' => [
+                'except' => [
+                    '/add_to_cart',
+                    '/capture-order'
+                ]
+            ],
             // 'invalidchars',
         ],
         'after' => [
