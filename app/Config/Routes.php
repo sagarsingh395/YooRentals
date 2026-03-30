@@ -43,7 +43,13 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->get('admin/service', 'Service\Services::index');
     $routes->match(['get', 'post'], 'admin/add-service', 'Service\Services::add_service');
     $routes->match(['get', 'post'], 'admin/edit-service/(:num)', 'Service\Services::edit_service/$1');
+    $routes->match(['get', 'post'], 'admin/view-service/(:num)', 'Service\Services::view_service/$1');
     $routes->match(['get', 'post'], 'admin/delete-service/(:num)', 'Service\Services::delete_service/$1');
+    
+    /**************************Rooms**************************************************/
+    $routes->match(['get', 'post'], 'admin/add-room/(:num)', 'Service\ServiceCatogary::add_room/$1');
+    $routes->match(['get', 'post'], 'admin/delete-room/(:num)', 'Service\ServiceCatogary::delete_service/$1');
+    $routes->match(['get', 'post'], 'admin/edit-room/(:num)', 'Service\ServiceCatogary::edit_room/$1');
 
     /**************************User Group************************************************/
     $routes->get('admin/user-group', 'Admin\UserGroup::index');

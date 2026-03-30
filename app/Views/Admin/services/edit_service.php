@@ -78,8 +78,7 @@
                     <label class="col-sm-2 col-form-label">Service Name</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="service_name" id="service_name" value="<?= $prev_details->service_name ?? '' ?>" placeholder="Service Name">
-                        <span
-                            class="text-danger"><?= isset($validation['service_name']) ? $validation['service_name'] : '' ?></span>
+                        <span class="text-danger"><?= isset($validation['service_name']) ? $validation['service_name'] : '' ?></span>
                     </div>
                 </div>
 

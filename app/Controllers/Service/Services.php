@@ -44,17 +44,17 @@ class Services extends BaseController
                 $data['create_at'] = date('Y-m-d');
                 $data['updated_at'] = date('Y-m-d');
                 $groupId = $this->commonmodel->insertRecord('tbl_service', $data);
-                if (isset($post['menu_id']) && isset($post['crudid'])) {
-                    foreach ($post['menu_id'] as $key => $menuid) {
-                        $prvlgarr = array();
-                        $prvlgarr['group_id'] = $groupId;
-                        $prvlgarr['menu_id'] = $menuid;
-                        $prvlgarr['crud_ids'] = implode(',', $post['crudid'][$key]);
-                        $prvlgarr['added_at'] = date('Y-m-d');
-                        $this->commonmodel->insertRecord('tbl_group_privilege', $prvlgarr);
-                    }
-                    // echo '<pre>';print_r($post);exit;	
-                }
+                // if (isset($post['menu_id']) && isset($post['crudid'])) {
+                //     foreach ($post['menu_id'] as $key => $menuid) {
+                //         $prvlgarr = array();
+                //         $prvlgarr['group_id'] = $groupId;
+                //         $prvlgarr['menu_id'] = $menuid;
+                //         $prvlgarr['crud_ids'] = implode(',', $post['crudid'][$key]);
+                //         $prvlgarr['added_at'] = date('Y-m-d');
+                //         $this->commonmodel->insertRecord('tbl_group_privilege', $prvlgarr);
+                //     }
+                //     // echo '<pre>';print_r($post);exit;	
+                // }
                 if ($groupId) {
                     session()->setFlashdata(['message' => 'New Service Added Successfully', 'type' => 'success']);
                 } else {
@@ -68,7 +68,19 @@ class Services extends BaseController
         $this->data['menulist'] = $this->commonmodel->getAllRecord('tbl_group_menu_list', ['status' => 1]);
         return view('Admin/services/add_service', $this->data);
     }
-
+    public function view_service($id)
+    {
+        $this->data['service'] = $this->commonmodel->getOneRecord(
+            'tbl_service',
+            ['service_id' => $id]
+        );
+        $this->data['roomlist'] = $this->commonmodel->getAllRecord(
+            'tbl_room',
+            ['service_id' => $id]
+        );
+        return view('Admin/services/view_service', $this->data);
+    }
+    
     public function edit_service($id)
     {
         if ($this->request->getMethod() === 'POST') {
@@ -113,15 +125,16 @@ class Services extends BaseController
             }
         }
         $this->data['prev_details'] = $this->commonmodel->getOneRecord('tbl_service', array('service_id' => $id));
-        // $this->data['menulist'] = $this->commonmodel->getAllRecord('tbl_group_menu_list', ['status' => 1]);
+        $this->data['menulist'] = $this->commonmodel->getAllRecord('tbl_group_menu_list', ['status' => 1]);
         return view('Admin/services/edit_service', $this->data);
     }
 
     public function delete_service($id = false)
     {
-        $deleteAllPrivilege = $this->commonmodel->deleteRecord('tbl_service', ['service_id' => $id]);
-        $deleted = $this->commonmodel->deleteRecord('tbl_service', array('service_id' => $id));
-        if ($deleted && $deleteAllPrivilege) {
+        // $deleteAllPrivilege = $this->commonmodel->deleteRecord('tbl_group_privilege', ['group_id' => $id]);
+        $deleted = $this->commonmodel->deleteRecord('tbl_service', ['service_id' => $id]);
+
+        if ($deleted) {
             session()->setFlashdata(['message' => 'Service delete successfully', 'type' => 'success']);
         } else {
             session()->setFlashdata(['message' => 'Something went wrong.', 'type' => 'danger']);
