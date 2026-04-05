@@ -1,58 +1,5 @@
 <?= $this->extend("admin/_layouts/master") ?>
 <?= $this->section("content") ?>
-<style>
-    .form-check .form-check-input {
-        margin-left: 5px;
-    }
-
-    .form-group {
-        margin-bottom: .4rem;
-    }
-
-    .page-title {
-        font-size: 26px;
-        font-weight: 600;
-        white-space: nowrap;
-    }
-
-    .index-title {
-        color: #4e73df;
-        font-weight: 500;
-    }
-
-    .menu-row {
-        margin-bottom: 4px;
-        align-items: center;
-    }
-
-    .menu-name {
-        overflow-x: auto;
-    }
-
-    .menu-name label {
-        white-space: nowrap;
-        display: inline-block;
-    }
-
-    .checkbox-group {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-
-    .checkbox-group .form-check {
-        margin-bottom: 2px;
-    }
-
-    .menu-name::-webkit-scrollbar {
-        height: 4px;
-    }
-
-    .menu-name::-webkit-scrollbar-thumb {
-        background: #ccc;
-        border-radius: 5px;
-    }
-</style>
 
 <div class="content-wrapper">
     <!-- Header -->
@@ -63,8 +10,6 @@
             <li class="breadcrumb-item active">Edit-service</li>
         </ol>
     </div>
-
-    <!-- Card -->
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="index-title">Edit service</h5>
@@ -81,8 +26,6 @@
                         <span class="text-danger"><?= isset($validation['service_name']) ? $validation['service_name'] : '' ?></span>
                     </div>
                 </div>
-
-                <!-- Status -->
                 <div class="form-group row">
                     <label for="image" class="col-sm-2 col-form-label">Status</label>
                     <?php
@@ -105,7 +48,6 @@
                             class="text-danger"><?= isset($validation['status']) ? $validation['status'] : '' ?></span>
                     </div>
                 </div>
-                <!-- Buttons -->
                 <button type="submit" class="btn btn-primary btn-sm">Update</button>
                 <button type="reset" class="btn btn-secondary btn-sm">Reset</button>
                 <a href="<?= base_url('admin/service') ?>" class="btn btn-warning btn-sm">Cancel</a>

@@ -1,38 +1,6 @@
 <?= $this->extend("admin/_layouts/master") ?>
 <?= $this->section("content") ?>
 
-<style>
-    .page-title {
-        font-size: 26px;
-        font-weight: 600
-    }
-
-    .index-title {
-        color: #4e73df;
-        font-weight: 500
-    }
-
-    .status-badge {
-        background: #28a745;
-        color: #fff;
-        padding: 3px 10px;
-        border-radius: 5px;
-        font-size: 12px
-    }
-
-    .action-icon {
-        font-size: 18px;
-        margin-right: 10px
-    }
-
-    .edit-icon {
-        color: #4e73df
-    }
-
-    .delete-icon {
-        color: #dc3545
-    }
-</style>
 <div class="content-wrapper">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="page-title mb-0">User Groups</h1>
@@ -68,11 +36,10 @@
             <?php endif; ?>
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="index-title">User Group Index</h5>
-                <?php if (is_privilege(2, 3)) { ?>
+                <?php if (is_privilege(2, 2)) { ?>
                     <a href="<?= base_url('admin/add-group') ?>" class="btn btn-primary btn-sm">Add User Group</a>
                 <?php } ?>
             </div>
-
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead class="table-light">

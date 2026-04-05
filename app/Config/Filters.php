@@ -77,7 +77,8 @@ class Filters extends BaseFilters
             // 'honeypot',
             'csrf' => [
                 'except' => [
-                    '/add_to_cart',
+                    // '/add_to_cart',
+                    '/create-order',
                     '/capture-order'
                 ]
             ],

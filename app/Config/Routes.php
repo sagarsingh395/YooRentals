@@ -6,15 +6,23 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 /******************************Error**************************************************/
-// $routes->get('test403', function() {return view('admin/order/view_order');});
 $routes->get('forbidden', 'ErrorControllers::forbidden');
 
-/*****************************Public Routes (no auth required)************************/
+/*****************************Booking Routes*********************************/
 $routes->get('/', 'Home::index');
-$routes->get('/product/(:any)', 'Home::product_details/$1');
-$routes->match(['get', 'post'], '/add_to_cart', 'Home::add_to_cart');
-$routes->match(['get', 'post'], '/checkout', 'Home::checkout');
-$routes->match(['get', 'post'], '/test', 'Home::test');
+$routes->get('save-booking', 'Home::saveBooking');
+
+/*****************************payment*********************************/
+$routes->post('/create-order', 'Home::createOrder');
+$routes->post('/capture-order', 'Home::captureOrder');
+
+/*****************************PDF,EXCEL*********************************/
+$routes->match(['get', 'post'], '/invoice/(:any)', 'Home::downloadInvoice/$1');
+$routes->match(['get', 'post'], '/exportexcel', 'Test::exportExcel');
+
+/*****************************contact*********************************/
+$routes->get('/contact', 'Home::contact');
+$routes->match(['get','post'],'/contact/save', 'Home::contact_save');
 
 /*****************************authentication-failed*************************************/
 $routes->get('/authentication-failed', function () {
@@ -22,15 +30,9 @@ $routes->get('/authentication-failed', function () {
 });
 
 $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
-    $routes->match(['get', 'post'], '/admin/dashboard', 'Admin\Dashboard::index');
+    $routes->get('admin/dashboard', 'Admin\Dashboard::index');
     $routes->get('admin/logout', 'Admin\Auth::logout');
 
-    /**************************For Testing(pdf,excel)*************************************/
-    $routes->match(['get', 'post'], '/testpdf', 'Test::test_pdf');
-    $routes->match(['get', 'post'], '/exportexcel', 'Test::exportExcel');
-    /**************************For Testing(payment)***************************************/
-    $routes->match(['get', 'post'], '/create-order', 'Home::createOrder');
-    $routes->match(['get', 'post'], '/capture-order', 'Home::captureOrder');
     /***************************USER ROUTES***********************************************/
     $routes->get('admin/users', 'Admin\Users::index');
     $routes->match(['get', 'post'], 'admin/add_user', 'Admin\Users::add_user');
@@ -45,11 +47,11 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->match(['get', 'post'], 'admin/edit-service/(:num)', 'Service\Services::edit_service/$1');
     $routes->match(['get', 'post'], 'admin/view-service/(:num)', 'Service\Services::view_service/$1');
     $routes->match(['get', 'post'], 'admin/delete-service/(:num)', 'Service\Services::delete_service/$1');
-    
-    /**************************Rooms**************************************************/
-    $routes->match(['get', 'post'], 'admin/add-room/(:num)', 'Service\ServiceCatogary::add_room/$1');
-    $routes->match(['get', 'post'], 'admin/delete-room/(:num)', 'Service\ServiceCatogary::delete_service/$1');
-    $routes->match(['get', 'post'], 'admin/edit-room/(:num)', 'Service\ServiceCatogary::edit_room/$1');
+
+    /**************************category**************************************************/
+    $routes->match(['get', 'post'], 'admin/add-category/(:num)', 'Service\ServiceCategory::add_category/$1');
+    $routes->match(['get', 'post'], 'admin/edit-category/(:num)', 'Service\ServiceCategory::edit_category/$1');
+    $routes->match(['get', 'post'], 'admin/delete-category/(:num)', 'Service\ServiceCategory::delete_category/$1');
 
     /**************************User Group************************************************/
     $routes->get('admin/user-group', 'Admin\UserGroup::index');

@@ -13,7 +13,7 @@
         }
         ?>
 
-        <?php if (is_privilege(1) || is_privilege(2) || is_privilege(6) || is_privilege(7)) : ?>
+        <?php if (is_privilege(1) || is_privilege(2) || is_privilege(6) || is_privilege(7) || is_privilege(8)) : ?>
             <!-- Dashboard -->
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('admin/dashboard') ?>">
@@ -23,7 +23,7 @@
             </li>
             <!-- Services -->
             <?php
-            $serviceOpen = in_array($segment2, ['service', 'room-service']) ? 'show' : '';
+            $serviceOpen = in_array($segment2, ['service']) ? 'show' : '';
             ?>
             <li class="nav-item">
                 <a class="nav-link <?= $serviceOpen ? '' : 'collapsed' ?>" data-bs-toggle="collapse" href="#service">
@@ -40,12 +40,12 @@
                                     Service List
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <?php /* <li class="nav-item">
                                 <a class="nav-link <?= ($segment2 == 'room-service') ? 'active' : '' ?>"
                                     href="<?= base_url('admin/room-service') ?>">
                                     Room List
                                 </a>
-                            </li>
+                            </li> */ ?>
                         <?php endif; ?>
                     </ul>
                 </div>

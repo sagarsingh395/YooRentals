@@ -1,6 +1,5 @@
 <?= $this->extend("admin/_layouts/master") ?>
 <?= $this->section("content") ?>
-
 <div class="content-wrapper">
     <div class="page-header">
         <h3 class="page-title">
@@ -17,7 +16,6 @@
 
                 </div>
             </form>
-
             <nav aria-label="breadcrumb">
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item active" aria-current="page">
@@ -93,16 +91,16 @@
                         </td>
                         <td>
                             <?php if (is_privilege(1, 4)) { ?>
-                            <a href="<?= base_url('admin/view_user/' . $list->user_id) ?>"
-                                class="btn btn-primary btn-sm"><i class="bi bi-eye"></i> View</a>
+                            <a href="<?= base_url('admin/view_user/' . $list->user_id) ?>" title="View"
+                                class="action-icon mdi mdi-eye"><i class="mdi mdi-square-eye-outline"></i></a>
                             <?php }
                                     if (is_privilege(1, 3)) { ?>
-                            <a href="<?= base_url('admin/edit_user/' . $list->user_id) ?>"
-                                class="btn btn-info btn-sm"><i class="bi bi-pencil"></i> Edit</a>
+                            <a href="<?= base_url('admin/edit_user/' . $list->user_id) ?>" title="Edit"
+                                 class="action-icon edit-icon"><i class="mdi mdi-square-edit-outline"></i></a>
                             <?php }
                                     if (is_privilege(1, 5)) { ?>
-                            <a href="<?= base_url('admin/delete_user/' . $list->user_id) ?>"
-                                class="btn btn-danger btn-sm" onclick="return confirm('Are You Sure?')">Delete</a>
+                            <a href="<?= base_url('admin/delete_user/' . $list->user_id) ?>" title="Delete"
+                                 class="action-icon delete-icon"><i class="mdi mdi-delete"></i>
                             <?php } ?>
                         </td>
                     </tr>
@@ -114,7 +112,6 @@
             </table>
         </div>
     </div>
-
 </div>
 
 <script>
@@ -133,7 +130,6 @@ document.getElementById("searchInput").addEventListener("keyup", function() {
         });
         return;
     }
-
     rows.forEach(row => {
         row.classList.remove("table-danger");
         let email = row.cells[3].textContent.toLowerCase();

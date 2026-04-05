@@ -90,5 +90,5 @@ class Autoload extends AutoloadConfig
      */
     // public $files = [];
 
-    public $helpers = ['paypal'];
+    public $helpers = ['custom','paypal'];
 }

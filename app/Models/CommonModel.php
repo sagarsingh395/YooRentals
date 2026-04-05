@@ -14,6 +14,10 @@ class CommonModel extends Model
     private $menuTbl;
     private $privilegeTbl;
     public $settingTbl;
+
+    private $serviceTbl;
+    private $CategoryTbl;
+
     public function __construct()
     {
         $this->db = \Config\Database::connect();
@@ -22,6 +26,8 @@ class CommonModel extends Model
         $this->menuTbl = 'tbl_group_menu_list';
         $this->privilegeTbl = 'tbl_group_privilege';
         $this->settingTbl = 'tbl_setting';
+        $this->CategoryTbl = 'tbl_category';
+        $this->serviceTbl = 'tbl_service';
     }
     public function insertRecord($table, $data)
     {

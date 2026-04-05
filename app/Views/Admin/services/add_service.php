@@ -1,58 +1,5 @@
 <?= $this->extend("admin/_layouts/master") ?>
 <?= $this->section("content") ?>
-<style>
-    .form-check .form-check-input {
-        margin-left: 5px;
-    }
-
-    .form-group {
-        margin-bottom: .4rem;
-    }
-
-    .page-title {
-        font-size: 26px;
-        font-weight: 600;
-        white-space: nowrap;
-    }
-
-    .index-title {
-        color: #4e73df;
-        font-weight: 500;
-    }
-
-    .menu-row {
-        margin-bottom: 4px;
-        align-items: center;
-    }
-
-    .menu-name {
-        overflow-x: auto;
-    }
-
-    .menu-name label {
-        white-space: nowrap;
-        display: inline-block;
-    }
-
-    .checkbox-group {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-
-    .checkbox-group .form-check {
-        margin-bottom: 2px;
-    }
-
-    .menu-name::-webkit-scrollbar {
-        height: 4px;
-    }
-
-    .menu-name::-webkit-scrollbar-thumb {
-        background: #ccc;
-        border-radius: 5px;
-    }
-</style>
 
 <div class="content-wrapper">
     <!-- Header -->

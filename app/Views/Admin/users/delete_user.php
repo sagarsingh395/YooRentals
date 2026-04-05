@@ -1,6 +1,5 @@
 <?= $this->extend("admin/_layouts/master") ?>
 <?= $this->section("content") ?>
-<?= $this->include('pluging'); ?>
 
 <div class="content-wrapper">
     <div class="container-fluid">

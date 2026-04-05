@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Controllers;
-
 use App\Libraries\Cart;
 use Mpdf\Mpdf;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;

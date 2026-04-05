@@ -16,6 +16,8 @@ class Services extends BaseController
     {
         $this->authmodel = model('App\Models\AuthModel', false);
         $this->commonmodel = model('App\Models\CommonModel', false);
+
+        $this->data = [];
     }
     public function index()
     {
@@ -28,8 +30,7 @@ class Services extends BaseController
         $this->data['servicelist'] = $this->commonmodel->getAllRecord('tbl_service');
         return view("Admin/services/serviceindex", $this->data);
     }
-
-    public function add_service()
+   public function add_service()
     {
         if ($this->request->getMethod() === 'POST') {
             $validation = \Config\Services::validation();
@@ -74,13 +75,13 @@ class Services extends BaseController
             'tbl_service',
             ['service_id' => $id]
         );
-        $this->data['roomlist'] = $this->commonmodel->getAllRecord(
-            'tbl_room',
+        $this->data['categorylist'] = $this->commonmodel->getAllRecord(
+            'tbl_category',
             ['service_id' => $id]
         );
         return view('Admin/services/view_service', $this->data);
     }
-    
+
     public function edit_service($id)
     {
         if ($this->request->getMethod() === 'POST') {
@@ -98,11 +99,11 @@ class Services extends BaseController
                 $updated = $this->commonmodel->updateRecord('tbl_service', $data, ['service_id' => $id]);
                 $loginId = session('user_id');
                 //echo $loginId; exit;
-                if ($loginId == 1 || $loginId == 20) {
-                    $deleteAllPrivilege = $this->commonmodel->deleteRecord('tbl_group_privilege', ['group_id' => $id, 'menu_id !=' => 2]);
-                } else {
-                    $deleteAllPrivilege = $this->commonmodel->deleteRecord('tbl_group_privilege', ['group_id' => $id]);
-                }
+                // if ($loginId == 1 || $loginId == 20) {
+                //     $deleteAllPrivilege = $this->commonmodel->deleteRecord('tbl_group_privilege', ['group_id' => $id, 'menu_id !=' => 2]);
+                // } else {
+                //     $deleteAllPrivilege = $this->commonmodel->deleteRecord('tbl_group_privilege', ['group_id' => $id]);
+                // }
                 if (isset($post['menu_id']) && isset($post['crudid'])) {
                     foreach ($post['menu_id'] as $key => $menuid) {
                         $prvlgarr = array();
@@ -128,7 +129,6 @@ class Services extends BaseController
         $this->data['menulist'] = $this->commonmodel->getAllRecord('tbl_group_menu_list', ['status' => 1]);
         return view('Admin/services/edit_service', $this->data);
     }
-
     public function delete_service($id = false)
     {
         // $deleteAllPrivilege = $this->commonmodel->deleteRecord('tbl_group_privilege', ['group_id' => $id]);
@@ -150,18 +150,6 @@ class Services extends BaseController
             $data = array();
             $data = $_POST;
             unset($data['submit']);
-            /*if(isset($_FILES['logo']['name']) && $_FILES['logo']['name'] != ''){
-                if($img = $this->request->getFile('logo')){ 
-                    $imgname = $img->getName();
-                    if($img->isValid() && !$img->hasMoved()){
-                        $ext = explode('.',$imgname);
-                        $ext = end($ext);
-                        $newName = 'logo'.time().'.'.$ext;
-                        $img->move('./public/assets/upload/images/',$newName);
-                    }
-                }
-                $data['logo'] = $newName;
-            }*/
             $updated = $this->commonmodel->update_setting($data, 1);
             if ($updated) {
                 // $this->session->setFlashdata(['message'=>'Setting Update Successfully','type'=>'success']);

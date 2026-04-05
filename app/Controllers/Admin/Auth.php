@@ -83,11 +83,4 @@ class Auth extends BaseController
         }
         return redirect()->back();
     }
-    // public function logout()
-    // {
-    //     if (session()->has('userlogin')) {
-    //         session()->destroy();
-    //     }
-    //     return redirect()->back();
-    // }
 }

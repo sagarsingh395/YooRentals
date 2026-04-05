@@ -51,10 +51,16 @@ class AuthCheckFilter implements FilterInterface
             '/admin/edit-group/*'   => [2, 3],
             '/admin/delete-group/*' => [2, 4],
 
-            /**************Members(Menu ID: 3)****************** */
-            '/admin/members'          => [3, null],
-            '/admin/active-members'   => [3, null],
-            '/admin/inactive-members' => [3, null],
+            /**************Services(Menu ID: 7)****************** */
+            '/admin/services'       => [7, null],
+            '/admin/add-service'    => [7, 2],
+            '/admin/edit-service/*' => [7, 3],
+            '/admin/view-service/*' => [7, 4],
+            '/admin/delete-service/*' => [7, 5],
+
+            /**************Settings(Menu ID: 6)****************** */
+            '/admin/setting'        => [6, null],
+
         ];
 
         foreach ($urlArr as $key => $value) {

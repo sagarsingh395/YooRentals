@@ -7,15 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Yoo Rental</title>
     <!-- plugins:css -->
-    <?php
-  /* 
-<link rel="stylesheet" href="<?= base_url('assets/admin/vendors/mdi/css/materialdesignicons.min.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/admin/vendors/mdi/css/materialdesignicons.min.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/admin/vendors/ti-icons/css/themify-icons.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/admin/vendors/css/vendor.bundle.base.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/admin/vendors/font-awesome/css/font-awesome.min.css') ?>">
-    */
-    ?>
-
+    <link rel="stylesheet" href="<?= base_url('assets/admin/css/custom_style.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/admin/css/style.css') ?>">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="<?= base_url('assets/admin/images/logo1a.png') ?>" />
@@ -70,6 +66,7 @@
     <script src="<?= base_url('assets/admin/js/settings.js') ?>"></script>
     <script src="<?= base_url('assets/admin/js/todolist.js') ?>"></script>
     <script src="<?= base_url('assets/admin/js/jquery.cookie.js') ?>"></script>
+    <script src="<?= base_url('assets/admin/js/error_remove.js') ?>"></script>
     <!-- endinject -->
 </body>
 

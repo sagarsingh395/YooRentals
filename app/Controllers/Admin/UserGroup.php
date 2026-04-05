@@ -123,7 +123,7 @@ class UserGroup extends BaseController
     {
         if ($id == 1) {
             session()->setFlashdata(['message' => 'Admin Group can not delete!', 'type' => 'danger']);
-            return redirect()->to('admin/user-groups');
+            return redirect()->to('admin/user-group');
         }
         $deleteAllPrivilege = $this->commonmodel->deleteRecord('tbl_group_privilege', ['group_id' => $id]);
         $deleted = $this->commonmodel->deleteRecord('tbl_group', array('group_id' => $id));
